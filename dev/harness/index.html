@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тайнопись · стенд</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="harness.css">
+</head>
+<body>
+  <header class="hbar">
+    <b><i class="fa-solid fa-flask"></i> Стенд «Тайнописи»</b>
+    <span class="hgroup" id="users"><span>Смотрит:</span></span>
+    <button type="button" id="open-panel"><i class="fa-solid fa-key"></i> Кнопка на панели</button>
+    <span class="hgroup"><select id="demo-kind"></select><button type="button" id="demo">Пример</button><button type="button" id="reset">Сбросить всё</button></span>
+  </header>
+  <div id="stage">
+    <div id="windows"></div>
+    <aside id="side">
+      <h3>Чат</h3>
+      <div id="chat-log"></div>
+      <h3>Журнал</h3>
+      <div id="journal-log"></div>
+    </aside>
+  </div>
+  <div id="toasts"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+  <script src="foundry-mock.js"></script>
+  <script type="module" src="harness.js"></script>
+</body>
+</html>

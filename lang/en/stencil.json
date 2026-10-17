@@ -1,0 +1,61 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "stencil": {
+        "name": "Letter with a secret",
+        "desc": "An ordinary letter and a brass stencil: lay it straight and the secret shows through the windows",
+        "untitled": "New letter with a secret",
+        "part": {
+          "letter": "Letter",
+          "plate": "Stencil"
+        },
+        "field": {
+          "cover": "Letter text",
+          "coverHint": "An innocent letter: “Dear Auntie, the harvest is fine this year…” The phrase letters are found in it in order.",
+          "phrase": "Secret phrase",
+          "phraseHint": "What shows through the windows. For example: The castle falls at dawn",
+          "width": "Width",
+          "widthTip": "Characters per line of the letter, 20 to 60. Empty — chosen by the letter length (about 34).",
+          "yo": "Ё as Е"
+        },
+        "rows": {
+          "one": "{n} line",
+          "other": "{n} lines"
+        },
+        "chars": {
+          "one": "{n} character",
+          "other": "{n} characters"
+        },
+        "slots": {
+          "one": "{n} window",
+          "other": "{n} windows"
+        },
+        "status": {
+          "sheet": "letter: {rows} of {chars}",
+          "auto": "(width by length)"
+        },
+        "problem": {
+          "noCover": "Write the letter: ordinary text to hide the phrase in.",
+          "noPhrase": "Type the secret phrase: its letters will be found in the letter.",
+          "missingFirst": "The letter has no “{letter}”, the first letter of the phrase. Add to the letter.",
+          "missing": "After “{after}” there is no “{letter}” left in the letter. Add to the letter: this letter is needed closer to the end.",
+          "unknown": "The letter could not be built. Check the text and the phrase."
+        },
+        "code": "Windows: {n}",
+        "preview": {
+          "toggle": "Stencil on top",
+          "letter": "Phrase letters highlighted",
+          "plate": "The stencil lies straight"
+        },
+        "view": {
+          "plateAria": "Stencil. Drag to move; arrows move it, Enter puts it in place.",
+          "align": "In place",
+          "lift": "Lift the stencil",
+          "hintFull": "Drag the stencil and lay it straight on the letter — it settles by itself and letters show through the windows. Arrows move it, Enter puts it in place.",
+          "hintLetter": "You only have the letter.",
+          "hintPlate": "You only have the stencil. Without the letter its windows are empty."
+        }
+      }
+    }
+  }
+}

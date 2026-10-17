@@ -1,0 +1,139 @@
+/* Вид «scytale»: лента сверху, под ней — намотка на жезл; у кого только жезл — рисунок жезла. */
+
+.ssl-ciphers .cp-scytale-desk {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 0;
+  container-type: size;
+}
+
+.ssl-ciphers .cp-scytale-ribbon {
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: center;
+}
+
+.ssl-ciphers .cp-scytale-ribbon svg {
+  display: block;
+  width: 100%;
+  max-width: var(--cp-scytale-max, 100%);
+  height: auto;
+  max-height: 36cqh;
+}
+
+/* Намотка вписана в остаток стола (лента над ней не прыгает); длинная (тонкий жезл) — прокручивается вбок. */
+.ssl-ciphers .cp-scytale-wind {
+  flex: 1 1 auto;
+  min-height: 90px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cp-line-2) transparent;
+}
+
+.ssl-ciphers .cp-scytale-wind svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.5)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+  animation: cp-scytale-fade 160ms ease both;
+}
+
+.ssl-ciphers .cp-scytale-l {
+  transition: fill 160ms ease;
+}
+
+.ssl-ciphers .cp-scytale-l.is-hot {
+  fill: #7a1f12;
+  stroke: rgba(255, 222, 150, 0.95);
+  stroke-width: 1.4px;
+  paint-order: stroke;
+}
+
+/* «Намотать на жезл»: витки ложатся один за другим, по ленте пробегает блик. */
+.ssl-ciphers .cp-scytale-wind.is-winding .cp-scytale-turn {
+  animation: cp-scytale-turn 300ms var(--cp-ease) both;
+  animation-delay: calc(var(--j) * 22ms);
+}
+
+.ssl-ciphers .cp-scytale-wind.is-snug .cp-scytale-sheen {
+  animation: cp-scytale-sheen 900ms ease-out 240ms both;
+}
+
+@keyframes cp-scytale-fade {
+  from {
+    opacity: 0.55;
+  }
+}
+
+@keyframes cp-scytale-turn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes cp-scytale-sheen {
+  from {
+    opacity: 1;
+    transform: translateX(-40%);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(300%);
+  }
+}
+
+/* Панель толщины */
+.ssl-ciphers .cp-scytale-bar__label {
+  margin-right: 2px;
+  color: var(--cp-muted);
+  font: 700 12px/1 var(--cp-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ssl-ciphers .cp-scytale-n {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+  min-width: 6.4em;
+  color: var(--cp-muted);
+  font-size: 13.5px;
+}
+
+.ssl-ciphers .cp-scytale-n b {
+  color: var(--cp-accent);
+  font: 700 20px/1 var(--cp-display);
+  font-variant-numeric: lining-nums;
+}
+
+.ssl-ciphers .cp-scytale-bar .cp-btn--primary {
+  margin-left: 10px;
+}
+
+/* Только жезл */
+.ssl-ciphers .cp-scytale-rodstage svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* В мастерской: стол над кнопками толщины */
+.cp-workshop-app .cp-preview .cp-scytale-desk {
+  gap: 12px;
+  padding-top: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssl-ciphers .cp-scytale-wind svg,
+  .ssl-ciphers .cp-scytale-wind.is-winding .cp-scytale-turn,
+  .ssl-ciphers .cp-scytale-wind.is-snug .cp-scytale-sheen,
+  .ssl-ciphers .cp-scytale-l {
+    animation: none;
+    transition: none;
+  }
+}

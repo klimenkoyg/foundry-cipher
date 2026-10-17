@@ -1,0 +1,11 @@
+<section class="cp-inbox">
+  {{#each items}}
+  <button type="button" class="cp-inbox__item" data-action="open" data-id="{{id}}" data-shared="{{shared}}">
+    <i class="{{icon}}" inert></i>
+    <span class="cp-inbox__title">{{title}}</span>
+    <span class="cp-inbox__parts">{{sub}}</span>
+  </button>
+  {{else}}
+  <p class="cp-empty">{{cpT "Inbox.empty"}}</p>
+  {{/each}}
+</section>

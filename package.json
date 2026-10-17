@@ -1,0 +1,14 @@
+{
+  "name": "ssl_ciphers",
+  "private": true,
+  "type": "module",
+  "description": "Тайнопись · Ciphers & Puzzles — шифры и головоломки для Foundry VTT",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "check": "node scripts-dev/check.mjs",
+    "build": "node scripts-dev/build.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

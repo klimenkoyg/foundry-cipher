@@ -1,0 +1,17 @@
+<div class="cp-view cp-kind-{{kindId}}">
+  {{#if missing}}
+  <p class="cp-empty">{{cpT "View.missing"}}</p>
+  {{else}}
+  <section class="cp-view__desk">
+    {{#if shared}}<p class="cp-shared-note"><i class="fa-solid fa-people-group" inert></i> {{cpT "View.sharedNote"}}</p>{{/if}}
+    <div class="cp-view__body">{{{body}}}</div>
+    {{#if hint}}<p class="cp-hint">{{hint}}</p>{{/if}}
+  </section>
+  <aside class="cp-notes">
+    <label class="cp-notes__field">
+      <span class="cp-notes__label"><i class="fa-solid fa-feather-pointed" inert></i> {{notesLabel}}</span>
+      <textarea name="notes" spellcheck="false" placeholder="{{cpT 'View.notesHint'}}">{{notes}}</textarea>
+    </label>
+  </aside>
+  {{/if}}
+</div>

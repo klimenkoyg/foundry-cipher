@@ -1,0 +1,18 @@
+<form class="cp-form" autocomplete="off">
+  {{#if puzzle}}
+  <label class="cp-field cp-field--title">
+    <span class="cp-field__label"><i class="{{kindIcon}}" inert></i> {{kindName}} · {{cpT "Field.title"}}</span>
+    <input type="text" name="title" value="{{puzzle.title}}" placeholder="{{cpT 'Puzzle.untitled'}}">
+  </label>
+  {{#each fields}}
+  {{#if group}}
+  <div class="cp-field cp-field--group">
+    {{#each group}}{{> "ssl-ciphers.field" this}}{{/each}}
+  </div>
+  {{else}}
+{{!-- Без отступа: иначе Handlebars добавит его к каждой строке многострочного поля. --}}
+{{> "ssl-ciphers.field" this}}
+  {{/if}}
+  {{/each}}
+  {{/if}}
+</form>

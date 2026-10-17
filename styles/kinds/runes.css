@@ -1,0 +1,255 @@
+/* Вид «runes»: послание тайными знаками, обрывки ключа и таблица догадок. */
+
+/* ---------- стол игрока: послание и обрывки рядом ---------- */
+
+.ssl-ciphers .cp-runes-desk {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  min-height: 0;
+}
+
+.ssl-ciphers .cp-runes-desk.has-side {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.ssl-ciphers .cp-runes-desk > .cp-fit {
+  min-width: 0;
+}
+
+.ssl-ciphers .cp-runes-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  max-width: 230px;
+  padding: 6px 6px 10px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.ssl-ciphers .cp-runes-scrap {
+  flex: 0 0 auto;
+  width: calc(var(--w) * 2.15px);
+  max-width: 100%;
+  rotate: var(--tilt, 0deg);
+}
+
+.ssl-ciphers .cp-runes-scrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 6px 9px rgba(0, 0, 0, 0.5)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+/* Только обрывки, без послания: крупно, вразброс посередине стола. */
+.ssl-ciphers .cp-runes-scraps {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 28px 34px;
+  min-height: 0;
+  padding: 18px;
+  overflow-y: auto;
+}
+
+.ssl-ciphers .cp-runes-scraps .cp-runes-scrap {
+  width: calc(var(--w) * 3.6px);
+}
+
+/* Общий стол: какие обрывки выложены. */
+.ssl-ciphers .cp-runes-lay {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  color: var(--cp-muted);
+  font-size: 13px;
+}
+
+/* ---------- послание ---------- */
+
+.ssl-ciphers .cp-runes-sheet svg {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ssl-ciphers .cp-runes-g {
+  cursor: pointer;
+}
+
+.ssl-ciphers .cp-runes-hit {
+  transition: fill 160ms ease;
+}
+
+.ssl-ciphers .cp-runes-g:hover .cp-runes-hit {
+  fill: rgba(122, 90, 58, 0.12);
+}
+
+.ssl-ciphers .cp-runes-g.is-hot .cp-runes-hit {
+  fill: rgba(196, 140, 40, 0.3);
+}
+
+.ssl-ciphers .cp-runes-slot {
+  transition: fill 200ms ease;
+}
+
+/* ---------- таблица знаков ---------- */
+
+.ssl-ciphers .cp-runes-table {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  max-height: 34%;
+  padding: 2px 2px 4px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.ssl-ciphers .cp-runes-cell {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-items: center;
+  gap: 3px;
+  width: 52px;
+  margin: 0;
+  padding: 7px 4px 4px;
+  border: 1px solid var(--cp-line);
+  border-radius: var(--cp-r);
+  background: rgba(255, 240, 210, 0.04);
+  color: var(--cp-text);
+  cursor: text;
+  transition: border-color 140ms, background 140ms;
+}
+
+.ssl-ciphers .cp-runes-cell:hover {
+  border-color: var(--cp-line-2);
+}
+
+.ssl-ciphers .cp-runes-cell.is-hot {
+  border-color: rgba(217, 180, 106, 0.7);
+  background: rgba(217, 180, 106, 0.12);
+}
+
+.ssl-ciphers .cp-runes-ico {
+  display: block;
+  width: 27px;
+  height: 35px;
+  overflow: visible;
+}
+
+.ssl-ciphers .cp-runes-cell__count {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  color: var(--cp-faint);
+  font: 500 10px/1 var(--cp-ui);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.ssl-ciphers .cp-runes-cell .cp-runes-cell__in {
+  width: 38px;
+  height: 30px;
+  min-height: 0;
+  padding: 0;
+  font: 700 19px/1 var(--cp-prose);
+  text-align: center;
+  text-transform: uppercase;
+  caret-color: var(--cp-accent);
+}
+
+.ssl-ciphers .cp-runes-cell__fixed {
+  display: grid;
+  width: 38px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(217, 180, 106, 0.55);
+  border-radius: var(--cp-r);
+  background: linear-gradient(rgba(217, 180, 106, 0.22), rgba(217, 180, 106, 0.1));
+  color: var(--cp-accent);
+  font: 700 19px/1 var(--cp-prose);
+}
+
+.ssl-ciphers .cp-runes-cell.is-pinned {
+  border-color: rgba(217, 180, 106, 0.4);
+  cursor: default;
+}
+
+.ssl-ciphers .cp-runes-cell.is-pinned .cp-runes-ico {
+  color: var(--cp-accent);
+}
+
+.ssl-ciphers .cp-runes-cell.is-clash .cp-runes-cell__in {
+  border-color: var(--cp-danger);
+  color: var(--cp-danger);
+}
+
+.ssl-ciphers .cp-runes-cell .cp-runes-cell__in.is-bad {
+  border-color: var(--cp-danger);
+  animation: cp-runes-shake 360ms ease;
+}
+
+.ssl-ciphers .cp-runes-cell.is-flash {
+  animation: cp-runes-flash 700ms ease;
+}
+
+@keyframes cp-runes-shake {
+  20%,
+  60% {
+    translate: -2px 0;
+  }
+
+  40%,
+  80% {
+    translate: 2px 0;
+  }
+}
+
+@keyframes cp-runes-flash {
+  30% {
+    border-color: var(--cp-accent);
+    background: rgba(217, 180, 106, 0.28);
+  }
+}
+
+/* ---------- предпросмотр у ведущего ---------- */
+
+.cp-workshop-app .cp-runes-keyfit {
+  flex: 0 1 auto;
+  width: 100%;
+  max-height: 38%;
+  aspect-ratio: var(--cp-ratio);
+}
+
+.cp-workshop-app .cp-runes-keyfit svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+}
+
+.cp-workshop-app .cp-runes-frag-pick {
+  flex-wrap: wrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssl-ciphers .cp-runes-hit,
+  .ssl-ciphers .cp-runes-slot,
+  .ssl-ciphers .cp-runes-cell {
+    transition: none;
+  }
+
+  .ssl-ciphers .cp-runes-cell.is-flash,
+  .ssl-ciphers .cp-runes-cell .cp-runes-cell__in.is-bad {
+    animation: none;
+  }
+}

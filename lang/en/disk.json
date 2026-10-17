@@ -1,0 +1,53 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "disk": {
+        "name": "Cipher disk",
+        "desc": "A note in shifted letters and a two-ring disk: turn it until the words show through",
+        "untitled": "New disk",
+        "part": {
+          "message": "Note",
+          "disk": "Disk"
+        },
+        "field": {
+          "phrase": "Note text",
+          "phraseHint": "What the players read once they turn the disk right.",
+          "key": "Key: letter under “A”",
+          "keyHint": "E.g. D. Empty — random",
+          "keyTip": "Which inner-ring letter sits under the outer “A”. This works too: “B over E”.",
+          "keyword": "Ring keyword",
+          "keywordHint": "Optional",
+          "keywordTip": "Mix the inner ring like Alberti did: the keyword's letters without repeats first, then the rest in order.",
+          "spaces": "Spaces and marks",
+          "spacesTip": "Keep spaces and punctuation in the note. Off — letters only, in groups of five."
+        },
+        "status": {
+          "ru": "Russian alphabet: 32 letters, Ё as Е",
+          "en": "Latin alphabet: 26 letters",
+          "random": "random key — {top} over {under}",
+          "word": "ring keyword “{word}”"
+        },
+        "problem": {
+          "empty": "Type the note text: the cipher is built from it.",
+          "key": "The key is one letter: the inner-ring letter under “A”. E.g. D or “A over D”.",
+          "keyAlphabet": "The key has a letter outside the note's alphabet: {chars}.",
+          "keyword": "The ring keyword has letters outside the note's alphabet: {chars}."
+        },
+        "code": "Key: {top} over {under}",
+        "codeWord": "Inner ring — by the keyword “{word}”",
+        "preview": {
+          "label": "The disk is set to the key: {key}. The decryption is under the note's lines."
+        },
+        "view": {
+          "over": "{top} over {under}",
+          "ccw": "Turn the ring one letter counterclockwise (←)",
+          "cw": "Turn the ring one letter clockwise (→)",
+          "diskAria": "Cipher disk. Arrow keys turn the inner ring one letter.",
+          "hintFull": "Drag the inner ring, use the mouse wheel or the buttons. Find a note letter on the inner ring — the real one is right above it.",
+          "hintMessage": "You only have the note. Its letters are shifted around a circle — you need the disk to read it.",
+          "hintDisk": "You only have the disk. Drag the inner ring or use the mouse wheel."
+        }
+      }
+    }
+  }
+}

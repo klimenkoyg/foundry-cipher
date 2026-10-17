@@ -1,0 +1,215 @@
+/* Вид «knock» — перестук: каменная стена, клочок с записью точками, таблица на пергаменте. */
+
+/* ---------- раскладка окна игрока ---------- */
+
+.ssl-ciphers .cp-knock {
+  display: grid;
+  flex: 1 1 auto;
+  gap: 16px;
+  min-height: 0;
+}
+
+.ssl-ciphers .cp-knock--both {
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+}
+
+.ssl-ciphers .cp-knock__main,
+.ssl-ciphers .cp-knock__side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+}
+
+
+.ssl-ciphers .cp-knock__side > .cp-fit {
+  flex: 1 1 auto;
+}
+
+/* ---------- панель ---------- */
+
+.ssl-ciphers .cp-knock-bar .cp-btn--primary {
+  min-width: 112px;
+}
+
+.ssl-ciphers .cp-knock-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  color: var(--cp-muted);
+  font: italic 14px/1 var(--cp-prose);
+}
+
+.ssl-ciphers .cp-knock-state::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cp-line-2);
+  transition: background 200ms;
+}
+
+.ssl-ciphers .cp-knock-state.is-on {
+  color: var(--cp-text);
+}
+
+.ssl-ciphers .cp-knock-state.is-on::before {
+  background: var(--cp-accent);
+  box-shadow: 0 0 8px rgba(217, 180, 106, 0.7);
+  animation: cp-knock-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes cp-knock-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ---------- стена ---------- */
+
+.ssl-ciphers .cp-knock-wall {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 150px;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+
+.ssl-ciphers .cp-knock-wall svg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ssl-ciphers .cp-knock-ring,
+.ssl-ciphers .cp-knock-dust {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ssl-ciphers .cp-knock-progress {
+  flex: none;
+  align-self: center;
+  width: min(100%, 560px);
+  height: 2px;
+  overflow: hidden;
+  border-radius: 1px;
+  background: rgba(255, 240, 210, 0.08);
+}
+
+.ssl-ciphers .cp-knock-progress i {
+  display: block;
+  height: 100%;
+  background: rgba(217, 180, 106, 0.65);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 260ms linear;
+}
+
+/* ---------- клочок с записью ---------- */
+
+.ssl-ciphers .cp-knock-scrap {
+  position: relative;
+  flex: 0 1 auto;
+  align-self: center;
+  width: min(100%, 560px);
+  min-height: 64px;
+  max-height: 42%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cp-line-2) transparent;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  scroll-behavior: smooth;
+}
+
+.ssl-ciphers .cp-knock-scrap.is-off {
+  display: none;
+}
+
+.ssl-ciphers .cp-knock-scrap svg,
+.ssl-ciphers .cp-knock-pv__record svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ssl-ciphers .cp-knock-scrap__empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: #8a6a44;
+  font: italic 15px/1.2 var(--cp-prose);
+  pointer-events: none;
+}
+
+.ssl-ciphers .cp-knock-scrap__empty[hidden] {
+  display: none;
+}
+
+.ssl-ciphers .is-live .cp-knock-d,
+.ssl-ciphers .is-live .cp-knock-sep {
+  opacity: 0;
+  transition: opacity 140ms ease-out;
+}
+
+.ssl-ciphers .is-live .cp-knock-d.is-on,
+.ssl-ciphers .is-live .cp-knock-sep.is-on {
+  opacity: 1;
+}
+
+/* ---------- предпросмотр у ведущего ---------- */
+
+.cp-workshop-app .cp-knock-pv {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+
+.cp-workshop-app .cp-knock-pv__record {
+  flex: 0 1 auto;
+  align-self: center;
+  width: min(100%, 460px);
+  min-height: 90px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cp-line-2) transparent;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.5)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.cp-workshop-app .cp-knock-pv > .cp-fit {
+  flex: 1 0 210px;
+}
+
+.ssl-ciphers .cp-knock-rl__hl {
+  transition: opacity 180ms;
+}
+
+.ssl-ciphers .cp-knock-rl.is-on .cp-knock-rl__hl {
+  opacity: 0.42;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssl-ciphers .cp-knock-progress i,
+  .ssl-ciphers .is-live .cp-knock-d,
+  .ssl-ciphers .is-live .cp-knock-sep,
+  .ssl-ciphers .cp-knock-rl__hl {
+    transition: none;
+  }
+
+  .ssl-ciphers .cp-knock-state.is-on::before {
+    animation: none;
+  }
+
+  .ssl-ciphers .cp-knock-scrap {
+    scroll-behavior: auto;
+  }
+}

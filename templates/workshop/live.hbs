@@ -1,0 +1,97 @@
+<section class="cp-live">
+  {{#if puzzle}}
+  <p class="cp-status{{#if problem}} is-problem{{/if}}" role="status">
+    {{#if problem}}<i class="fa-solid fa-triangle-exclamation" inert></i>{{/if}}
+    <span>{{status}}</span>
+  </p>
+  {{#if cipher}}
+  <div class="cp-live__body">
+    <div class="cp-preview">{{{preview}}}</div>
+
+    <div class="cp-side">
+      <section class="cp-card cp-card--code">
+        <h3 class="cp-card__head">{{cpT "Code.title"}}</h3>
+        {{#if code}}<p class="cp-code">{{code}}</p>{{/if}}
+        {{#each notes}}<p class="cp-loop"><i class="fa-solid fa-circle-info" inert></i> {{this}}</p>{{/each}}
+        {{#if reads}}<p class="cp-reads">{{cpT "Code.reads"}} <b>{{reads}}</b></p>{{/if}}
+        <div class="cp-actions">
+          {{#if code}}<button type="button" class="cp-btn" data-action="copyCode"><i class="fa-solid fa-copy" inert></i> {{cpT "Code.copy"}}</button>{{/if}}
+          <button type="button" class="cp-btn" data-action="whisperCode"><i class="fa-solid fa-comment-dots" inert></i> {{cpT "Code.whisper"}}</button>
+          {{#if shuffle}}<button type="button" class="cp-btn" data-action="shuffle" data-tooltip="{{cpT 'Code.shuffleHint'}}"><i class="fa-solid fa-shuffle" inert></i> {{cpT "Code.shuffle"}}</button>{{/if}}
+        </div>
+      </section>
+
+      <section class="cp-card">
+        <h3 class="cp-card__head">{{cpT "Table.title"}}</h3>
+        {{#if table}}
+        <p class="cp-muted"><i class="fa-solid fa-people-group" inert></i> {{cpT "Table.who"}} {{table.who}}</p>
+        <p class="cp-muted cp-table-parts" data-tooltip="{{cpT 'Table.partsHint'}}">{{cpT "Table.parts"}}
+          {{#each table.parts}}<button type="button" class="cp-chip" data-action="tablePart" data-part="{{id}}" aria-pressed="{{#if held}}true{{else}}false{{/if}}"><i class="{{icon}}" inert></i> {{label}}</button>{{/each}}
+        </p>
+        <div class="cp-actions">
+          <button type="button" class="cp-btn" data-action="tableShow"><i class="fa-solid fa-eye" inert></i> {{cpT "Table.show"}}</button>
+          {{#if table.stale}}<button type="button" class="cp-btn cp-chip--warn" data-action="tableRefresh" data-tooltip="{{cpT 'Table.staleHint'}}"><i class="fa-solid fa-arrows-rotate" inert></i> {{cpT "Table.refresh"}}</button>{{/if}}
+          <button type="button" class="cp-btn cp-btn--quiet cp-btn--danger" data-action="tableClose"><i class="fa-solid fa-xmark" inert></i> {{cpT "Table.close"}}</button>
+        </div>
+        {{else}}
+        <p class="cp-muted">{{cpT "Table.text"}}</p>
+        <div class="cp-actions">
+          <button type="button" class="cp-btn cp-btn--primary" data-action="tableOpen"{{#if noPlayers}} disabled{{/if}}><i class="fa-solid fa-people-group" inert></i> {{cpT "Table.open"}}</button>
+        </div>
+        {{/if}}
+      </section>
+
+      <section class="cp-card">
+        <h3 class="cp-card__head">{{cpT "Hand.title"}}</h3>
+        {{#if noPlayers}}
+        <p class="cp-muted">{{cpT "Hand.noPlayers"}}</p>
+        {{else}}
+        <ul class="cp-people">
+          {{#each people}}
+          <li class="cp-person" data-user="{{id}}">
+            <span class="cp-person__dot{{#if active}} is-online{{/if}}" style="--cp-user:{{color}}" data-tooltip="{{#if active}}{{cpT 'Hand.online'}}{{else}}{{cpT 'Hand.offline'}}{{/if}}"></span>
+            <span class="cp-person__name">{{name}}</span>
+            <span class="cp-person__parts">
+              {{#each parts}}<button type="button" class="cp-chip" data-action="toggle" data-part="{{id}}" aria-pressed="{{#if held}}true{{else}}false{{/if}}"><i class="{{icon}}" inert></i> {{label}}</button>{{/each}}
+              {{#if stale}}<button type="button" class="cp-chip cp-chip--warn" data-action="refresh" data-tooltip="{{cpT 'Hand.staleHint'}}"><i class="fa-solid fa-arrows-rotate" inert></i> {{cpT "Hand.refresh"}}</button>{{/if}}
+              {{#if has}}<button type="button" class="cp-btn cp-btn--icon cp-btn--ghost" data-action="ping" data-tooltip="{{cpT 'Hand.ping'}}" aria-label="{{cpT 'Hand.ping'}}"><i class="fa-solid fa-eye" inert></i></button>{{/if}}
+            </span>
+          </li>
+          {{/each}}
+        </ul>
+        {{/if}}
+        <div class="cp-actions">
+          {{#unless noPlayers}}<button type="button" class="cp-btn" data-action="giveAll"><i class="fa-solid fa-hand-holding" inert></i> {{cpT "Hand.giveAll"}}</button>{{/unless}}
+          <button type="button" class="cp-btn" data-action="tryIt"><i class="fa-solid fa-user-secret" inert></i> {{cpT "Hand.tryIt"}}</button>
+        </div>
+      </section>
+
+      <section class="cp-card">
+        <h3 class="cp-card__head">{{cpT "Export.title"}}</h3>
+        <div class="cp-actions">
+          {{#each images}}<button type="button" class="cp-btn" data-action="exportImage" data-image="{{id}}"><i class="fa-solid fa-image" inert></i> {{label}}</button>{{/each}}
+          <button type="button" class="cp-btn" data-action="toJournal"><i class="fa-solid fa-book-open" inert></i> {{cpT "Export.journal"}}</button>
+        </div>
+      </section>
+
+      <button type="button" class="cp-btn cp-btn--danger cp-btn--quiet" data-action="remove"><i class="fa-solid fa-trash" inert></i> {{cpT "Remove.button"}}</button>
+    </div>
+  </div>
+  {{else}}
+  <div class="cp-live__body">
+    <div class="cp-blank">
+      <i class="fa-solid fa-feather-pointed" inert></i>
+      <p>{{cpT "Status.blank"}}</p>
+    </div>
+    <div class="cp-side">
+      <button type="button" class="cp-btn cp-btn--danger cp-btn--quiet" data-action="remove"><i class="fa-solid fa-trash" inert></i> {{cpT "Remove.button"}}</button>
+    </div>
+  </div>
+  {{/if}}
+  {{else}}
+  <div class="cp-blank cp-blank--first">
+    <i class="fa-solid fa-key" inert></i>
+    <p>{{cpT "Workshop.first"}}</p>
+  </div>
+  {{/if}}
+</section>

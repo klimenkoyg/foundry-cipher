@@ -1,0 +1,452 @@
+/* Книжный шифр: страница книги (HTML на пергаменте), записка, расшифровка у ведущего. */
+
+/* ---------- страница книги ---------- */
+
+.ssl-ciphers .cp-book-page {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 2px 5px 5px 2px;
+  color: #3a2214;
+  /* обрез страниц справа и снизу, потом — тень на столе */
+  box-shadow:
+    1px 1px 0 #eadcb9,
+    2px 2px 0 #b59c72,
+    3px 3px 0 #e2d1aa,
+    4px 4px 0 #a48a60,
+    5px 5px 0 #d9c69c,
+    0 18px 38px rgba(0, 0, 0, 0.55),
+    0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* корешок: тень у левого края */
+.ssl-ciphers .cp-book-page::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30px;
+  background: linear-gradient(90deg, rgba(70, 40, 10, 0.3), rgba(70, 40, 10, 0.08) 45%, rgba(70, 40, 10, 0));
+  pointer-events: none;
+}
+
+.ssl-ciphers .cp-book-paper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ssl-ciphers .cp-book-scroll {
+  position: relative;
+  height: 100%;
+  padding: 24px 36px 30px 44px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 53, 16, 0.4) transparent;
+  /* текст тает у краёв — видно, что страница прокручивается */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 20px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 20px), transparent);
+}
+
+.ssl-ciphers .cp-book-scroll:focus-visible {
+  outline: 2px solid rgba(122, 31, 18, 0.45);
+  outline-offset: -4px;
+}
+
+.ssl-ciphers .cp-book-head {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  margin: 0 0 16px;
+  color: #7a5a3a;
+}
+
+.ssl-ciphers .cp-book-title {
+  color: #3a2214;
+  font: 700 21px/1.2 "Alegreya SC", Alegreya, Georgia, serif;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ssl-ciphers .cp-book-orn {
+  display: block;
+  width: 120px;
+  height: 8px;
+}
+
+.ssl-ciphers .cp-book-text {
+  font: 16.5px/1.8 Alegreya, Georgia, serif;
+  font-variant-numeric: lining-nums;
+  text-align: justify;
+  hyphens: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ssl-ciphers .cp-book-p {
+  margin: 0 0 0.5em;
+  padding: 0;
+  text-indent: 1.6em;
+}
+
+.ssl-ciphers .cp-book-p:last-child {
+  margin-bottom: 0;
+}
+
+.ssl-ciphers .cp-book-w {
+  position: relative;
+  margin: 0 -2px;
+  padding: 0 2px;
+  border-radius: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 160ms, box-shadow 160ms, color 160ms;
+}
+
+.ssl-ciphers .cp-book-w:hover {
+  background-color: rgba(122, 31, 18, 0.09);
+}
+
+/* отметка игрока — как охрой по строке */
+.ssl-ciphers .cp-book-w.is-marked {
+  background-color: rgba(214, 156, 52, 0.42);
+  box-shadow: inset 0 -2px 0 rgba(122, 31, 18, 0.55);
+  color: #2a1206;
+}
+
+/* ---------- окно игрока ---------- */
+
+.ssl-ciphers .cp-book-desk {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 24px;
+  min-height: 0;
+  padding: 4px 6px 12px 2px;
+}
+
+.ssl-ciphers .cp-book-desk--solo {
+  grid-template-columns: minmax(0, 680px);
+  justify-content: center;
+}
+
+.ssl-ciphers .cp-book-count b {
+  font-variant-numeric: lining-nums;
+}
+
+.ssl-ciphers .cp-book-side {
+  min-height: 0;
+  padding: 12px 8px 20px 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.ssl-ciphers .cp-book-slip {
+  transform: rotate(-2.2deg);
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.5)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+}
+
+.ssl-ciphers .cp-book-slip svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ssl-ciphers .cp-book-solo {
+  max-width: 440px;
+}
+
+.ssl-ciphers .cp-book-solo .cp-book-slip {
+  filter: none;
+}
+
+@container (max-width: 560px) {
+  .ssl-ciphers .cp-book-desk {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .ssl-ciphers .cp-book-side {
+    order: -1;
+    max-height: 150px;
+    padding: 4px 0;
+  }
+
+  .ssl-ciphers .cp-book-side .cp-book-slip {
+    max-width: 230px;
+    margin: 0 auto;
+  }
+}
+
+/* ---------- предпросмотр у ведущего ---------- */
+
+.cp-workshop-app .cp-book-preview {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
+}
+
+.cp-workshop-app .cp-book-page--preview {
+  flex: 1 1 auto;
+  min-height: 120px;
+  margin-right: 5px;
+}
+
+.cp-workshop-app .cp-book-page--preview .cp-book-scroll {
+  padding: 16px 28px 22px 40px;
+}
+
+.cp-workshop-app .cp-book-page--preview .cp-book-head {
+  margin-bottom: 8px;
+}
+
+.cp-workshop-app .cp-book-page--preview .cp-book-title {
+  font-size: 18px;
+}
+
+.cp-workshop-app .cp-book-page--preview .cp-book-text {
+  font-size: 15px;
+  line-height: 2.2;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.cp-workshop-app .cp-book-page--preview .cp-book-w {
+  cursor: default;
+}
+
+.cp-workshop-app .cp-book-page--preview .cp-book-w:not(.is-word, .is-spell):hover {
+  background-color: transparent;
+}
+
+/* слово целиком */
+.ssl-ciphers .cp-book-w.is-word {
+  background-color: rgba(184, 134, 43, 0.3);
+  box-shadow: 0 0 0 1px rgba(150, 105, 30, 0.45);
+  color: #7a1f12;
+  font-weight: 700;
+}
+
+/* слово, из которого взяты буквы */
+.ssl-ciphers .cp-book-w.is-spell {
+  text-decoration: underline dotted rgba(122, 31, 18, 0.5);
+  text-underline-offset: 4px;
+}
+
+.ssl-ciphers .cp-book-l {
+  border-radius: 2px;
+  background: rgba(168, 80, 95, 0.3);
+  box-shadow: 0 0 0 1px rgba(140, 50, 60, 0.4);
+  color: #7a1f12;
+  font-weight: 700;
+}
+
+.ssl-ciphers .cp-book-tag {
+  position: absolute;
+  bottom: calc(100% - 3px);
+  left: 50%;
+  translate: -50% 0;
+  padding: 1px 4px 0;
+  border: 1px solid rgba(122, 31, 18, 0.35);
+  border-radius: 7px;
+  background: #f4e8cb;
+  color: #7a1f12;
+  font: 700 10px/1.15 "Alegreya Sans", system-ui, sans-serif;
+  font-variant-numeric: lining-nums;
+  letter-spacing: 0.02em;
+  text-indent: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.ssl-ciphers .cp-book-w.is-hot {
+  box-shadow: 0 0 0 2px rgba(122, 31, 18, 0.75);
+}
+
+.ssl-ciphers .cp-book-w.is-flash {
+  animation: cp-book-flash 1.4s var(--cp-ease);
+}
+
+@keyframes cp-book-flash {
+  0%,
+  35% {
+    box-shadow: 0 0 0 3px rgba(122, 31, 18, 0.85), 0 0 14px 4px rgba(214, 156, 52, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 1px rgba(150, 105, 30, 0.45);
+  }
+}
+
+/* «Счёт»: номера слов и абзацев — проверить, что считается верно */
+.ssl-ciphers .cp-book-n {
+  margin-left: 1px;
+  color: #8a6a48;
+  font: 600 9.5px/1 "Alegreya Sans", system-ui, sans-serif;
+  font-variant-numeric: lining-nums;
+  vertical-align: -0.15em;
+}
+
+.ssl-ciphers .is-numbered .cp-book-p {
+  position: relative;
+}
+
+.ssl-ciphers .is-numbered .cp-book-p::before {
+  content: attr(data-p);
+  position: absolute;
+  top: 0.5em;
+  left: -30px;
+  width: 20px;
+  color: #7a1f12;
+  font: 700 12px/1 "Alegreya Sans", system-ui, sans-serif;
+  text-align: right;
+  text-indent: 0;
+}
+
+/* записка с расшифровкой */
+.cp-workshop-app .cp-book-key {
+  position: relative;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  max-height: 40%;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45), 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.cp-workshop-app .cp-book-key__row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 2px;
+  min-height: 0;
+  padding: 8px 12px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 53, 16, 0.4) transparent;
+}
+
+.cp-workshop-app .cp-book-grp {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  border-radius: 5px;
+  box-shadow: inset 0 -1px 0 rgba(90, 53, 16, 0.3);
+}
+
+.cp-workshop-app .cp-book-ref {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 3px 5px 3px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  color: #3a2214;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background-color 140ms, border-color 140ms;
+}
+
+.cp-workshop-app .cp-book-ref:hover {
+  border-color: rgba(122, 31, 18, 0.3);
+  background: rgba(122, 31, 18, 0.07);
+}
+
+.cp-workshop-app .cp-book-ref b {
+  font: italic 500 14.5px/1.1 Alegreya, Georgia, serif;
+  font-variant-numeric: lining-nums;
+}
+
+.cp-workshop-app .cp-book-ref i {
+  padding: 0 3px;
+  border-radius: 3px;
+  color: #7a1f12;
+  font: normal 700 12.5px/1.15 "Alegreya SC", Alegreya, Georgia, serif;
+  letter-spacing: 0.05em;
+}
+
+.cp-workshop-app .cp-book-ref.is-word i {
+  background: rgba(184, 134, 43, 0.3);
+}
+
+.cp-workshop-app .cp-book-ref:not(.is-word) i {
+  background: rgba(168, 80, 95, 0.22);
+}
+
+.cp-workshop-app .cp-book-dot {
+  padding: 0 4px;
+  color: #7a5a3a;
+  font: 700 18px/1 Alegreya, Georgia, serif;
+}
+
+/* «Счёт» — кнопка в конце записки */
+.cp-workshop-app .cp-book-corner {
+  display: grid;
+  flex: none;
+  align-self: center;
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+  margin: 0 0 0 auto;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(58, 34, 20, 0.35);
+  border-radius: 50%;
+  background: rgba(244, 232, 203, 0.7);
+  color: #3a2214;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background-color 140ms, color 140ms;
+}
+
+.cp-workshop-app .cp-book-corner:hover {
+  background: #f4e8cb;
+  border-color: rgba(122, 31, 18, 0.6);
+}
+
+.cp-workshop-app .cp-book-corner[aria-pressed="true"] {
+  border-color: #3a2214;
+  background: #3a2214;
+  color: #f4e8cb;
+}
+
+@container (max-width: 940px) {
+  .cp-workshop-app .cp-book-page--preview {
+    flex: none;
+    height: min(520px, 90cqw);
+  }
+
+  .cp-workshop-app .cp-book-key {
+    max-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssl-ciphers .cp-book-w,
+  .cp-workshop-app .cp-book-ref {
+    transition: none;
+  }
+
+  .ssl-ciphers .cp-book-w.is-flash {
+    animation: none;
+  }
+}

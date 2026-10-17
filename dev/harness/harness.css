@@ -1,0 +1,32 @@
+/* Стенд: только рамка вокруг окон модуля — шапка, «карта», окна, тосты. */
+:root { --bar-h: 46px; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: #0f1214 radial-gradient(ellipse at 30% 20%, #22303a, #0f1214 70%); color: #ddd; font: 14px/1.4 system-ui, sans-serif; }
+.hbar { position: sticky; top: 0; z-index: 1000; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 8px 14px; background: #191b1e; border-bottom: 1px solid #333; }
+.hbar button { padding: 5px 10px; border: 1px solid #555; border-radius: 4px; background: #26292d; color: #eee; font: inherit; cursor: pointer; }
+.hbar button[aria-pressed="true"] { border-color: #d9b46a; background: #3b3222; }
+.hgroup { display: inline-flex; align-items: center; gap: 6px; }
+#stage { position: relative; display: grid; grid-template-columns: 1fr 280px; min-height: calc(100vh - var(--bar-h)); }
+#windows { position: relative; }
+#side { padding: 10px; border-left: 1px solid #333; background: #15171a; overflow: auto; }
+#side h3 { margin: 6px 0; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #999; }
+.msg { margin-bottom: 8px; padding: 6px 8px; border: 1px solid #333; border-radius: 4px; background: #1d2024; font-size: 13px; }
+.msg header { color: #d9b46a; font-weight: 600; }
+.msg p { margin: 4px 0; }
+.jr { margin-bottom: 8px; font-size: 13px; }
+.jr img { width: 48%; border: 1px solid #333; }
+/* окно как в Foundry v13: рамка, шапка, содержимое */
+.application { position: absolute; display: flex; flex-direction: column; min-width: 280px; max-height: calc(100vh - var(--bar-h) - 8px); border: 1px solid #000; border-radius: 6px; box-shadow: 0 10px 40px rgba(0,0,0,.6); overflow: hidden; background: #1b1b1f; }
+.window-header { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 10px; background: #0e0e10; color: #e8e2d6; cursor: move; flex: none; }
+.window-title { flex: 1; margin: 0; font: 600 14px/1 system-ui, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.header-control { border: 0; background: none; color: #ccc; cursor: pointer; font-size: 15px; }
+.window-content { flex: 1; min-height: 0; }
+.window-resize-handle { position: absolute; right: 0; bottom: 0; width: 16px; height: 16px; cursor: nwse-resize; background: linear-gradient(135deg, transparent 50%, #777 50%, #777 60%, transparent 60%, transparent 70%, #777 70%, #777 80%, transparent 80%); }
+#toasts { position: fixed; top: 56px; left: 50%; z-index: 2000; display: grid; gap: 6px; transform: translateX(-50%); }
+.toast { padding: 8px 14px; border-radius: 4px; background: #2a3a2a; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.5); }
+.toast.warn { background: #4a3a1a; }
+.toast.error { background: #5a2020; }
+.mock-dialog { position: fixed; inset: 0; z-index: 3000; display: grid; place-items: center; background: rgba(0,0,0,.5); }
+.mock-dialog form { min-width: 320px; padding: 14px; border: 1px solid #555; border-radius: 6px; background: #222; }
+.mock-dialog footer { display: flex; justify-content: flex-end; gap: 8px; }
+.mock-dialog button { padding: 5px 12px; }

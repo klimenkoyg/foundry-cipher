@@ -1,0 +1,81 @@
+/* Вид «disk»: записка на столе и латунный диск с внутренним кольцом, которое крутят. */
+
+.ssl-ciphers .cp-disk-note,
+.ssl-ciphers .cp-disk-wheel {
+  position: absolute;
+}
+
+.ssl-ciphers .cp-disk-note {
+  border-radius: 2px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5), 0 3px 7px rgba(0, 0, 0, 0.35);
+  rotate: -1.2deg;
+}
+
+.ssl-ciphers :is(.cp-disk-note, .cp-disk-wheel) svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Тень диска — по его кругу, а не по рамке. */
+.ssl-ciphers .cp-disk-wheel {
+  border-radius: 50%;
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.5)) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+  touch-action: none;
+}
+
+.ssl-ciphers .cp-disk-wheel:focus-visible {
+  outline: none;
+}
+
+/* Рамка фокуса — по латунному кругу (в рисунке он чуть ниже середины: сверху метка). */
+.ssl-ciphers .cp-disk-wheel::after {
+  content: "";
+  position: absolute;
+  left: 4.17%;
+  top: 8.33%;
+  width: 91.67%;
+  height: 86.84%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ssl-ciphers .cp-disk-wheel:focus-visible::after {
+  box-shadow: 0 0 0 3px var(--cp-desk), 0 0 0 5px var(--cp-accent);
+}
+
+.ssl-ciphers .cp-disk-inner {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ssl-ciphers .cp-disk-wheel:not(.is-fixed) .cp-disk-inner {
+  cursor: grab;
+  transition: transform 300ms var(--cp-ease);
+}
+
+.ssl-ciphers .cp-disk-wheel.is-dragging .cp-disk-inner {
+  cursor: grabbing;
+  transition: none;
+}
+
+/* Панель: «А над Г». */
+.ssl-ciphers .cp-disk-read {
+  margin-left: auto;
+  color: var(--cp-muted);
+  font: 15px/1 var(--cp-prose);
+}
+
+.ssl-ciphers .cp-disk-read b {
+  display: inline-block;
+  min-width: 1.1em;
+  color: var(--cp-accent);
+  font: 700 19px/1 var(--cp-display);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssl-ciphers .cp-disk-wheel .cp-disk-inner {
+    transition: none;
+  }
+}

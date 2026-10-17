@@ -1,0 +1,34 @@
+<aside class="cp-shelf">
+  <h2 class="cp-shelf__head">{{cpT "Shelf.title"}}</h2>
+  <ul class="cp-shelf__list">
+    {{#each puzzles}}
+    <li>
+      <button type="button" class="cp-shelf__item" data-action="select" data-id="{{id}}" aria-current="{{#if selected}}true{{else}}false{{/if}}">
+        <i class="cp-shelf__icon {{icon}}" inert></i>
+        <span class="cp-shelf__title">{{title}}</span>
+        <span class="cp-shelf__meta">{{meta}}</span>
+        <span class="cp-shelf__marks">
+          {{#if onTable}}<i class="fa-solid fa-people-group" data-tooltip="{{cpT 'Shelf.onTable'}}" aria-label="{{cpT 'Shelf.onTable'}}"></i>{{/if}}
+          {{#if holders}}<span data-tooltip="{{cpT 'Shelf.holders'}}"><i class="fa-solid fa-user" inert></i> {{holders}}</span>{{/if}}
+        </span>
+      </button>
+    </li>
+    {{else}}
+    <li class="cp-shelf__empty">{{cpT "Shelf.empty"}}</li>
+    {{/each}}
+  </ul>
+  {{#if picking}}
+  <div class="cp-kinds" role="menu" aria-label="{{cpT 'Shelf.pick'}}">
+    {{#each kinds}}
+    <button type="button" class="cp-kinds__item" role="menuitem" data-action="create" data-kind="{{id}}">
+      <i class="{{icon}}" inert></i>
+      <span class="cp-kinds__name">{{name}}</span>
+      <span class="cp-kinds__desc">{{desc}}</span>
+    </button>
+    {{/each}}
+  </div>
+  {{/if}}
+  <button type="button" class="cp-btn cp-btn--primary cp-btn--wide" data-action="pick" aria-expanded="{{#if picking}}true{{else}}false{{/if}}">
+    <i class="fa-solid {{#if picking}}fa-xmark{{else}}fa-plus{{/if}}" inert></i> {{#if picking}}{{cpT "Common.cancel"}}{{else}}{{cpT "Shelf.create"}}{{/if}}
+  </button>
+</aside>

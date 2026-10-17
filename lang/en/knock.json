@@ -1,0 +1,72 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "knock": {
+        "name": "Wall knocks",
+        "desc": "Someone in the next cell knocks on the wall: row and column of a letter in a grid",
+        "untitled": "New knocking",
+        "part": {
+          "knocks": "Knocks",
+          "table": "Grid",
+          "record": "Knock notes"
+        },
+        "field": {
+          "phrase": "Message",
+          "phraseHint": "What gets knocked through the wall. A space is a pause between words; punctuation is dropped.",
+          "speed": "Pace",
+          "speedTip": "Slow is easier to count; fast is harder but shorter.",
+          "speed_slow": "slow",
+          "speed_normal": "normal",
+          "speed_fast": "fast"
+        },
+        "words": {
+          "one": "{n} word",
+          "other": "{n} words"
+        },
+        "time": {
+          "sec": "{s} s",
+          "min": "{m} min {s} s",
+          "minEven": "{m} min"
+        },
+        "status": {
+          "time": "knocking ≈ {time}",
+          "tableRu": "Russian grid, 5 rows of 6",
+          "tableEn": "tap code 5×5",
+          "swaps": "substitutions: {list}"
+        },
+        "problem": {
+          "empty": "Type a message: it will be knocked through the wall.",
+          "tooLong": "Too much to knock: {letters}, keep it to {max} at most. Shorten the message."
+        },
+        "swaps": "These letters are not in the grid and are knocked as their neighbours: {list}.",
+        "table": {
+          "titleRu": "Knock alphabet",
+          "titleEn": "Tap code",
+          "how": "first set of knocks — row, second — column"
+        },
+        "preview": {
+          "listen": "Listen",
+          "stop": "Stop",
+          "label": "Pace: {speed} · {time}"
+        },
+        "view": {
+          "listen": "Listen",
+          "pause": "Pause",
+          "again": "From the start",
+          "againTip": "Knocking from the very beginning; the notes start over",
+          "record": "Take notes",
+          "recordTip": "Dots appear on a scrap of paper with every knock",
+          "idle": "Silence",
+          "playing": "Knocking…",
+          "paused": "Paused",
+          "done": "The knocking stopped",
+          "wall": "Stone wall of the cell: the knocks come from here",
+          "scrapEmpty": "Dots will appear here",
+          "hintFull": "A set of knocks is the row, a pause, then the column. A longer pause is a new letter, longer still — a new word.",
+          "hintKnocks": "Count the knocks: the first set is the row, the second is the column. Someone in your party has the grid.",
+          "hintTable": "You only have the grid. The first set of knocks is the row, the second is the column."
+        }
+      }
+    }
+  }
+}

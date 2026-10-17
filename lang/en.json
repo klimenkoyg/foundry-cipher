@@ -1,0 +1,124 @@
+{
+  "CIPHERS": {
+    "Title": "Ciphers",
+    "Controls": {
+      "title": "Ciphers & Puzzles"
+    },
+    "Common": {
+      "cancel": "Cancel"
+    },
+    "Workshop": {
+      "title": "Ciphers · workshop",
+      "first": "No ciphers yet. Press “New cipher” and pick a kind."
+    },
+    "Shelf": {
+      "title": "Ciphers",
+      "create": "New cipher",
+      "pick": "Which cipher to create",
+      "empty": "Nothing here yet",
+      "holders": "How many players hold it",
+      "onTable": "On the shared table",
+      "unfinished": "not ready"
+    },
+    "Puzzle": {
+      "untitled": "New cipher"
+    },
+    "Field": {
+      "title": "Name",
+      "auto": "auto",
+      "script": "Handwriting"
+    },
+    "Count": {
+      "letters": {
+        "one": "{n} letter",
+        "other": "{n} letters"
+      }
+    },
+    "Status": {
+      "dropped": "Left out: {chars}",
+      "blank": "Fill in the fields and the cipher builds itself."
+    },
+    "Preview": {
+      "answer": "Answer"
+    },
+    "Code": {
+      "title": "Key",
+      "reads": "Reads:",
+      "copy": "Copy",
+      "whisper": "Whisper to me",
+      "shuffle": "Shuffle",
+      "shuffleHint": "Rebuild with the same text: new random choices, new key"
+    },
+    "Table": {
+      "title": "Shared table",
+      "text": "One cipher for everyone: one player turns it, everyone sees. Notes are shared too.",
+      "open": "Put on the table",
+      "close": "Take off the table",
+      "show": "Open the table",
+      "refresh": "Update",
+      "staleHint": "The table shows an old version: the cipher changed after it was put there",
+      "who": "At the table:",
+      "everyone": "all players",
+      "pickTitle": "Who is at the table",
+      "pickText": "The cipher appears for the checked players.",
+      "parts": "On the table:",
+      "partsHint": "What lies on the table. Click to put a part down or take it away, e.g. lay key scraps one by one."
+    },
+    "Hand": {
+      "title": "Hand to players",
+      "noPlayers": "No players in this world yet.",
+      "online": "Online",
+      "offline": "Offline: will see it on login",
+      "refresh": "Update",
+      "staleHint": "The player has an old version: the cipher changed after it was handed out",
+      "ping": "Open it for the player again",
+      "giveAll": "Give everything to everyone",
+      "tryIt": "Try as a player"
+    },
+    "Export": {
+      "title": "Images",
+      "journal": "To journal"
+    },
+    "Journal": {
+      "codePage": "Key (GM only)"
+    },
+    "Remove": {
+      "button": "Delete cipher",
+      "title": "Delete cipher",
+      "text": "Delete “{title}”? Players and the shared table will lose it too."
+    },
+    "Notify": {
+      "copied": "Key copied.",
+      "copyFailed": "Couldn't copy: select the text and copy it by hand.",
+      "givenAll": "“{title}” is with every player.",
+      "journal": "“{title}” is in the journal. Only the GM sees it until you share it.",
+      "journalFailed": "Couldn't save to the journal: see the console (F12).",
+      "received": "The GM handed you: “{title}”",
+      "taken": "The GM took back “{title}”",
+      "table": "On the shared table: “{title}”",
+      "nothing": "You don't have anything yet.",
+      "gmOnly": "Only the GM can do this.",
+      "noGM": "No GM online: the shared table won't save changes."
+    },
+    "View": {
+      "missing": "You no longer hold this.",
+      "notes": "Notes",
+      "notesShared": "Shared notes",
+      "notesHint": "What you read, what you tried…",
+      "tableTitle": "{title} · shared table",
+      "sharedNote": "Shared table: everyone sees what you see."
+    },
+    "Inbox": {
+      "title": "Ciphers",
+      "empty": "You don't have anything yet.",
+      "table": "Shared table"
+    },
+    "Script": {
+      "book": "book print",
+      "scribe": "scribe, quill",
+      "note": "hasty note",
+      "print": "hand-printed",
+      "charter": "old charter hand"
+    }
+  }
+}

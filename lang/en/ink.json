@@ -1,0 +1,56 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "ink": {
+        "name": "Invisible ink",
+        "desc": "An ordinary letter with lemon juice between the lines: it shows over a candle",
+        "untitled": "New letter",
+        "part": {
+          "letter": "Letter",
+          "revealed": "Revealed letter"
+        },
+        "field": {
+          "visible": "Letter",
+          "visibleHint": "What is written openly: news, requests, regards to the family…",
+          "hidden": "Secret writing",
+          "hiddenHint": "What shows over a candle. It goes between the lines; a new line starts a new line.",
+          "head": "Greeting",
+          "headHint": "E.g. Dearest Aunt Martha,",
+          "foot": "Signature",
+          "footHint": "E.g. Your loving Lissa"
+        },
+        "lines": {
+          "one": "{n} line of letter",
+          "other": "{n} lines of letter"
+        },
+        "hiddenLines": {
+          "one": "{n} hidden line",
+          "other": "{n} hidden lines"
+        },
+        "where": "Shows under letter lines: {rows}.",
+        "whereTail": {
+          "one": "{n} more line after the letter: not enough gaps.",
+          "other": "{n} more lines after the letter: not enough gaps."
+        },
+        "problem": {
+          "empty": "Write the letter — what is seen at once.",
+          "noHidden": "Add the secret writing — what shows over a candle.",
+          "tooLong": "The letter is too long: {length} characters, the sheet holds {max}.",
+          "hiddenTooLong": "The secret writing is too long: {length} characters, the gaps hold {max}.",
+          "unknown": "The letter did not build."
+        },
+        "preview": {
+          "reveal": "Reveal all",
+          "shown": "Hidden text in brown, as it shows over a candle",
+          "found": "The letter as the players find it"
+        },
+        "view": {
+          "candle": "Candle",
+          "candleTip": "Light or put out the candle",
+          "warmed": "Warmed:",
+          "hint": "Hold the mouse button and move the candle over the sheet: where the paper warms up, letters appear. Hold it longer to make them darker."
+        }
+      }
+    }
+  }
+}

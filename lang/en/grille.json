@@ -1,0 +1,70 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "grille": {
+        "name": "Turning grille",
+        "desc": "A letter grid and a brass grille you turn by the code",
+        "untitled": "New grille",
+        "part": {
+          "letter": "Letter",
+          "plate": "Grille"
+        },
+        "field": {
+          "phrase": "Phrase",
+          "phraseHint": "What the players will read. Spaces and punctuation are dropped.",
+          "head": "Text on top",
+          "headHint": "E.g. To Elecia. Personal.",
+          "foot": "Text at the bottom",
+          "footHint": "E.g. An empty cup holds everything. — L.",
+          "rows": "Size",
+          "rowsTip": "Side of the square in cells. Empty: the smallest square that fits the phrase; a long one is read in several passes.",
+          "dirs": "Turns in the code",
+          "dirs_mixed": "both ways (→ and ←)",
+          "dirs_cw": "clockwise only (→)",
+          "yo": "Ё as Е"
+        },
+        "status": {
+          "size": "{size} square",
+          "sizeAuto": "{size} square, sized to the phrase",
+          "perRow": "{per} per row",
+          "emptyRows": {
+            "one": "{n} row without phrase letters",
+            "other": "{n} rows without phrase letters"
+          }
+        },
+        "passes": {
+          "one": "{n} pass through the code",
+          "other": "{n} passes through the code"
+        },
+        "problem": {
+          "empty": "Type a phrase to build the letter.",
+          "tooLong": "Doesn't fit: {letters}, but a {size} square holds at most {max}. Clear “Size” to fit it automatically ({need}×{need}).",
+          "tooLongMax": "Too long: {letters}, but a letter holds at most {max}. Shorten the phrase.",
+          "unsolved": "Couldn't build a grille. Press “Shuffle” or change the size."
+        },
+        "code": "Code: {steps}. “{first}”",
+        "loop": "The code loops: after row {last} comes “{first}” again, without resetting the grille. {passes} in total.",
+        "preview": {
+          "all": "Phrase letters are highlighted; each row's code step is on the right",
+          "allPasses": "Phrase letters are highlighted, colour shows the pass ({passes}); each row's code step is on the right",
+          "step": "Step {i} of {n}: row {row}, {turn}, {top} on top",
+          "stepPass": "Pass {pass}, step {i} of {n}: row {row}, {turn}, {top} on top",
+          "stepper": "Code steps",
+          "prev": "Previous step",
+          "next": "Next step"
+        },
+        "view": {
+          "plateAria": "Grille. Click to turn clockwise, right-click to turn counter-clockwise, arrows to slide, Enter to put back.",
+          "turnLeft": "Turn counter-clockwise (Q)",
+          "turnRight": "Turn clockwise (E)",
+          "align": "Put back",
+          "lift": "Lift the grille",
+          "top": "On top:",
+          "hintFull": "Click the grille to turn it clockwise, right-click to turn it back. Drag to slide it. Q and E turn it from the keyboard.",
+          "hintLetter": "You only have the letter.",
+          "hintPlate": "You only have the grille. Click to turn it clockwise, right-click to turn it back."
+        }
+      }
+    }
+  }
+}

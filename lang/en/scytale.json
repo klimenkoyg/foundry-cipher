@@ -1,0 +1,63 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "scytale": {
+        "name": "Scytale",
+        "desc": "A strip of jumbled letters: wind it on a rod of the right thickness to read it",
+        "untitled": "New scytale",
+        "part": {
+          "ribbon": "Strip",
+          "rod": "Rod"
+        },
+        "field": {
+          "phrase": "Phrase",
+          "phraseHint": "What the players will read. Spaces and punctuation are removed.",
+          "faces": "Faces",
+          "facesTip": "The rod's thickness is the key: 3 to 12 faces. Leave empty to pick one by phrase length.",
+          "yo": "Ё as Е"
+        },
+        "faces": {
+          "one": "{n} face",
+          "other": "{n} faces"
+        },
+        "facesWord": {
+          "one": "face",
+          "other": "faces"
+        },
+        "status": {
+          "faces": "rod with {faces}",
+          "facesAuto": "rod with {faces}, by phrase length",
+          "ribbon": "strip of {letters}",
+          "tail": {
+            "one": "{n} filler at the end",
+            "other": "{n} fillers at the end"
+          }
+        },
+        "problem": {
+          "empty": "Type a phrase: the strip is built from it.",
+          "tooLong": "Too long: {letters}, but the strip holds at most {max}. Shorten the phrase."
+        },
+        "code": "Rod with {faces}",
+        "tailNote": {
+          "one": "The last letter is a filler.",
+          "other": "The last {n} letters are fillers."
+        },
+        "preview": {
+          "right": "Rod with {faces}: the phrase reads along the faces",
+          "wrong": "Rod with {faces}: gibberish along the faces"
+        },
+        "view": {
+          "thickness": "Rod thickness",
+          "thinner": "Thinner: fewer faces",
+          "thicker": "Thicker: more faces",
+          "wind": "Wind on the rod",
+          "windTip": "Wind the strip on your rod with {faces}",
+          "windAria": "The strip wound on a rod",
+          "hintFull": "Read along the faces, row by row. “Wind on the rod” puts the strip on your rod; − and + try another thickness.",
+          "hintRibbon": "Find the rod's thickness with − and +: at the right one, text reads along the faces.",
+          "hintRod": "You only have the rod. Without the strip there is nothing to read."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{{#if isCheckbox}}
+<label class="cp-check"{{#if tip}} data-tooltip="{{tip}}"{{/if}}>
+  <input type="checkbox" name="{{name}}"{{#if checked}} checked{{/if}}>
+  <span>{{label}}</span>
+</label>
+{{else}}
+<label class="cp-field cp-field--{{type}}{{#if wide}} cp-field--wide{{/if}}{{#if style}} cp-field--{{style}}{{/if}}"{{#if tip}} data-tooltip="{{tip}}"{{/if}}>
+  <span class="cp-field__label">{{label}}</span>
+  {{#if isTextarea}}<textarea name="{{name}}" rows="{{#if rows}}{{rows}}{{else}}2{{/if}}" spellcheck="false" placeholder="{{placeholder}}">{{value}}</textarea>{{/if}}
+  {{#if isText}}<input type="text" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}">{{/if}}
+  {{#if isNumber}}<input type="number" name="{{name}}" value="{{value}}" placeholder="{{placeholder}}"{{#if min}} min="{{min}}"{{/if}}{{#if max}} max="{{max}}"{{/if}} step="1">{{/if}}
+  {{#if isSelect}}<select name="{{name}}">{{#each options}}<option value="{{value}}"{{#if selected}} selected{{/if}}>{{label}}</option>{{/each}}</select>{{/if}}
+</label>
+{{/if}}

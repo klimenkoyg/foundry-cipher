@@ -1,0 +1,102 @@
+/* Вид «ink»: невидимые чернила. Письмо — общий .cp-sheet; здесь свеча над листом и её ореол. */
+
+.ssl-ciphers .cp-ink-stage.is-lit {
+  cursor: none;
+}
+
+/* Огонёк ходит за указателем: --x, --y — точка листа в процентах. */
+.ssl-ciphers .cp-ink-candle {
+  --x: 50%;
+  --y: 50%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.ssl-ciphers .cp-ink-candle.is-on {
+  opacity: 1;
+}
+
+/* Тёплый свет на бумаге: шире, чем прогревает свеча. */
+.ssl-ciphers .cp-ink-halo {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 214, 130, 0.95) 0%, rgba(255, 186, 86, 0.6) 20%, rgba(255, 160, 60, 0.22) 45%, rgba(255, 150, 50, 0) 70%);
+  mix-blend-mode: overlay;
+  translate: -50% -50%;
+  scale: 0.7;
+  opacity: 0.75;
+  transition: scale 260ms var(--cp-ease), opacity 260ms ease;
+  animation: cp-ink-glow 2.4s ease-in-out infinite;
+}
+
+.ssl-ciphers .cp-ink-candle.is-hot .cp-ink-halo {
+  scale: 1;
+  opacity: 1;
+}
+
+/* Пламя: яркая сердцевина — в точке свечи, язычок — вверх. */
+.ssl-ciphers .cp-ink-flame {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 6.2%;
+  aspect-ratio: 24 / 48;
+  overflow: visible;
+  translate: -50% -78%;
+  scale: 0.85;
+  filter: drop-shadow(0 0 6px rgba(255, 170, 70, 0.75));
+  transition: scale 260ms var(--cp-ease);
+}
+
+.ssl-ciphers .cp-ink-candle.is-hot .cp-ink-flame {
+  scale: 1.12;
+}
+
+.ssl-ciphers .cp-ink-flame__body {
+  transform-box: view-box;
+  transform-origin: 50% 85%;
+  animation: cp-ink-flicker 1.7s ease-in-out infinite;
+}
+
+@keyframes cp-ink-flicker {
+  0%,
+  100% {
+    transform: scale(1, 1) skewX(0deg);
+  }
+  20% {
+    transform: scale(0.96, 1.06) skewX(-2.5deg);
+  }
+  45% {
+    transform: scale(1.03, 0.95) skewX(1.5deg);
+  }
+  70% {
+    transform: scale(0.98, 1.04) skewX(3deg);
+  }
+  85% {
+    transform: scale(1.02, 0.98) skewX(-1deg);
+  }
+}
+
+@keyframes cp-ink-glow {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ssl-ciphers .cp-ink-flame__body,
+  .ssl-ciphers .cp-ink-halo {
+    animation: none;
+  }
+}

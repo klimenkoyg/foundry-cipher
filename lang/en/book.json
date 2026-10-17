@@ -1,0 +1,73 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "book": {
+        "name": "Book cipher",
+        "desc": "A note of numbers: paragraph, word and letter in a book the players must guess",
+        "untitled": "New book cipher",
+        "part": {
+          "note": "Note",
+          "book": "Book"
+        },
+        "field": {
+          "bookTitle": "Book title",
+          "bookTitleHint": "For example: Chronicles of the White Spire",
+          "source": "Book text",
+          "sourceHint": "Paste an excerpt: a chronicle, a prayer, a tale. Each line is a paragraph; blank lines don't count.",
+          "sourceTip": "A word is letters only: hyphenated counts as one word, numbers and punctuation don't count.",
+          "phrase": "Phrase",
+          "phraseHint": "What the players will read. Words found in the book are encoded whole, the rest letter by letter.",
+          "mode": "How to encode",
+          "modeTip": "“paragraph.word” is a whole word, “paragraph.word.letter” is one letter of that word",
+          "mode_words": "words, and letters where needed",
+          "mode_letters": "letters only"
+        },
+        "count": {
+          "words": {
+            "one": "{n} word",
+            "other": "{n} words"
+          },
+          "numbers": {
+            "one": "{n} number",
+            "other": "{n} numbers"
+          },
+          "paras": {
+            "one": "{n} paragraph",
+            "other": "{n} paragraphs"
+          }
+        },
+        "status": {
+          "phrase": "phrase of {words}: {whole} whole, {spelled} spelled out",
+          "phraseLetters": "phrase of {words}, all spelled out",
+          "note": "{numbers} in the note",
+          "book": "book of {paras}, {words}"
+        },
+        "problem": {
+          "empty": "Paste the book text and type a phrase — the note will build itself.",
+          "noBook": "Paste the book text: the players will count words in it.",
+          "noPhrase": "Type a phrase: it will be encoded as word numbers from the book.",
+          "noLetter": "The book has no letter “{letter}”, needed for “{word}”. Add a word with it to the book or change the phrase.",
+          "noLetters": "The book has no letters {letters}, needed for the phrase. Add words with them to the book or change the phrase.",
+          "unknown": "The note didn't build. Check the book and the phrase."
+        },
+        "code": {
+          "key": "The key is the book “{title}”. Numbers: paragraph.word, a third number is the letter in the word.",
+          "keyUntitled": "The key is the book given to the players. Numbers: paragraph.word, a third number is the letter in the word."
+        },
+        "preview": {
+          "whole": "Whole word",
+          "letter": "Letter of a word",
+          "numbersTip": "Paragraph and word numbers — check the count",
+          "refTip": "{what} — show in the book"
+        },
+        "view": {
+          "clear": "Erase marks",
+          "marked": "Marked:",
+          "hintFull": "The numbers on the note are paragraph, word and letter in the word. Click a word in the book to mark it; click again to unmark.",
+          "hintBook": "Click a word to mark it; click again to unmark.",
+          "hintNote": "A note of nothing but numbers. Somewhere there is a book they fit."
+        }
+      }
+    }
+  }
+}

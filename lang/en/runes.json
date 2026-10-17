@@ -1,0 +1,75 @@
+{
+  "CIPHERS": {
+    "Kind": {
+      "runes": {
+        "name": "Secret alphabet",
+        "desc": "A message in made-up signs; the key is torn into scraps the party finds along the way",
+        "untitled": "New secret alphabet",
+        "part": {
+          "message": "Message",
+          "key1": "Key scrap 1",
+          "key2": "Key scrap 2",
+          "key3": "Key scrap 3",
+          "key4": "Key scrap 4",
+          "key5": "Key scrap 5",
+          "key6": "Key scrap 6",
+          "fullkey": "Full key"
+        },
+        "field": {
+          "phrase": "Message",
+          "phraseHint": "What the players will read. Punctuation is dropped automatically.",
+          "style": "Signs",
+          "style_runes": "runes (straight strokes)",
+          "style_sigils": "cult sigils (arcs, circles, dots)",
+          "fragments": "Key scraps",
+          "fragmentsTip": "How many pieces to tear the key into. Each scrap is a separate part: hand them to different players as the adventure goes.",
+          "spaces": "Spaces between words",
+          "spacesTip": "Without spaces the signs run as one line — harder to crack."
+        },
+        "fragments": {
+          "one": "{n} scrap",
+          "other": "{n} scraps"
+        },
+        "status": {
+          "glyphs": {
+            "one": "{n} distinct sign",
+            "other": "{n} distinct signs"
+          },
+          "per": "of {per}",
+          "decoys": "decoys: {letters}",
+          "fewer": "only {n} scraps — too few distinct letters"
+        },
+        "meta": {
+          "runes": "runes",
+          "sigils": "cult sigils"
+        },
+        "problem": {
+          "empty": "Type a message: it will be written in secret signs.",
+          "tooLong": "Too long: {letters}, and a sheet holds at most {max}. Shorten the message."
+        },
+        "code": "Scrap {n}: {letters}",
+        "decoys": "Decoys — these letters are not in the message: {letters}",
+        "preview": {
+          "all": "The answer is under the signs; the colour shows which scrap holds the letter",
+          "frag": "Scrap {n} reveals {shown} of {total} signs",
+          "fragDecoys": "decoys: {letters}",
+          "pick": "What each scrap reveals"
+        },
+        "view": {
+          "fragment": "Key scrap {n}",
+          "decoyLegend": "† — decoy: this letter is not in the message",
+          "table": "Signs of the message",
+          "cellAria": "Sign {n} (in the message: {count})",
+          "pinned": "From key scrap {n}",
+          "done": "Filled",
+          "of": "of {total}",
+          "clear": "Erase guesses",
+          "clearSure": "Erase for sure?",
+          "hintFull": "Type the letters you guess into the table — they appear under the signs. Gold ones come from key scraps. Click a sign in the message to jump to its cell.",
+          "hintMessage": "You have no key: guess from frequent signs and short words. Click a sign in the message to jump to its cell.",
+          "hintKey": "You only hold a key scrap. The message itself is with someone else."
+        }
+      }
+    }
+  }
+}

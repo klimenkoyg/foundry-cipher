@@ -1,0 +1,21 @@
+/* Вид «stencil»: письмо с секретом — пергамент с ровными строками и латунная пластина с окошками. */
+
+/* Пластина без письма: лежит одна посередине, под ней — тёплое пятно света на столе. */
+.ssl-ciphers .cp-stencil-stage--plate {
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 230, 180, 0.07), rgba(0, 0, 0, 0) 72%);
+}
+
+/* Пластина прямоугольная: тень — по её углам, а не кругом. */
+.ssl-ciphers .cp-stencil-plate::before {
+  border-radius: 1.4% / 3%;
+}
+
+/* Буква, проступившая в окошке, чуть плотнее остального текста. */
+.ssl-ciphers .cp-stencil-sheet .cp-l.is-lit {
+  font-weight: 700;
+}
+
+.cp-workshop-app .cp-stencil-bar {
+  flex-wrap: wrap;
+}
