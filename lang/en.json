@@ -81,6 +81,7 @@
     },
     "Export": {
       "title": "Images",
+      "text": "All the cipher's images go into a new journal entry, with a key page for the GM. You can show them to players from the journal.",
       "journal": "To journal"
     },
     "Journal": {

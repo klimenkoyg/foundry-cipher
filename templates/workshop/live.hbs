@@ -68,8 +68,8 @@
 
       <section class="cp-card">
         <h3 class="cp-card__head">{{cpT "Export.title"}}</h3>
+        <p class="cp-muted">{{cpT "Export.text"}}</p>
         <div class="cp-actions">
-          {{#each images}}<button type="button" class="cp-btn" data-action="exportImage" data-image="{{id}}"><i class="fa-solid fa-image" inert></i> {{label}}</button>{{/each}}
           <button type="button" class="cp-btn" data-action="toJournal"><i class="fa-solid fa-book-open" inert></i> {{cpT "Export.journal"}}</button>
         </div>
       </section>

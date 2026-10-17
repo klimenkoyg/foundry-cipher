@@ -5,7 +5,7 @@
 
 import { newSeed } from "../../core/rng.mjs";
 import { FLAGS, MODULE_ID, SETTINGS, tpl } from "../constants.mjs";
-import { downloadImage, imagesOf, saveToJournal } from "../export.mjs";
+import { saveToJournal } from "../export.mjs";
 import { esc, has, t } from "../i18n.mjs";
 import { allParts, getKind, listKinds } from "../kinds/index.mjs";
 import { SCRIPT_IDS } from "../paper.mjs";
@@ -99,7 +99,6 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
       tableRefresh: WorkshopApp.#onTableRefresh,
       tableShow: WorkshopApp.#onTableShow,
       tablePart: WorkshopApp.#onTablePart,
-      exportImage: WorkshopApp.#onExportImage,
       toJournal: WorkshopApp.#onToJournal,
       remove: WorkshopApp.#onRemove,
     },
@@ -244,7 +243,6 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
       const names = table.users === null ? t("Table.everyone") : table.users.map((id) => game.users.get(id)?.name).filter(Boolean).join(", ");
       ctx.table = { who: names, stale: Tables.isStale(table, draft), parts: parts.map((p) => ({ ...p, held: Boolean(table.parts?.[p.id]) })) };
     }
-    ctx.images = imagesOf(draft).map(({ id, label }) => ({ id, label }));
     return ctx;
   }
 
@@ -489,10 +487,6 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
   static #onTableShow() {
     if (this.draft && Tables.get(this.draft.id)) ViewerApp.open(this.draft.id, { shared: true });
-  }
-
-  static async #onExportImage(event, target) {
-    if (this.draft?.cipher) await busy(target, () => downloadImage(this.draft, target.dataset.image));
   }
 
   static async #onToJournal(event, target) {

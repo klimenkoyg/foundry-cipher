@@ -1,12 +1,12 @@
-/* Картинки шифров: PNG для скачивания и печати, лёгкий WebP для журнала.
+/* Картинки шифров — в журнал: лёгкий WebP на сервере Foundry и страница с ключом для ведущего.
+   Оттуда их можно показать игрокам средствами самого Foundry. Скачивания нет: приложение Foundry
+   открывает такую картинку в новом окне, а не сохраняет.
    SVG рисуется в картинку вместе со шрифтами модуля — иначе вместо Alegreya был бы системный шрифт. */
 
 import { MODULE_ID, imageDir } from "./constants.mjs";
 import { esc, t } from "./i18n.mjs";
 import { getKind } from "./kinds/index.mjs";
 
-/** Скачивание — для печати: PNG без потерь, 2000 px хватает на лист A5. */
-const PRINT = { px: 2000, type: "image/png" };
 /** Журнал — картинки уходят на сервер и каждому игроку: WebP легче PNG в 30–50 раз, на глаз не хуже. */
 const JOURNAL = { px: 1600, type: "image/webp", quality: 0.86 };
 const EXT = { "image/png": "png", "image/webp": "webp" };
@@ -92,32 +92,12 @@ export async function svgToImage(svg, { type = "image/png", quality = 0.86 } = {
   }
 }
 
-const slug = (s) =>
-  String(s || "cipher")
-    .trim()
-    .replace(/[\\/:*?"<>|]+/g, "")
-    .replace(/\s+/g, "-")
-    .slice(0, 60) || "cipher";
 
 /** Картинки шифра: [{ id, label, svg(px) }]. */
 export function imagesOf(puzzle) {
   if (!puzzle?.cipher) return [];
   const kind = getKind(puzzle.kind);
   return kind.images(puzzle).map((img) => ({ ...img, label: t(`Kind.${kind.id}.part.${img.id}`) }));
-}
-
-/** Скачать одну картинку шифра. */
-export async function downloadImage(puzzle, imageId) {
-  const img = imagesOf(puzzle).find((i) => i.id === imageId);
-  if (!img) return;
-  const blob = await svgToImage(img.svg(PRINT.px), PRINT);
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `${slug(puzzle.title)}-${slug(img.label).toLowerCase()}.${EXT[blob.type] ?? "png"}`;
-  document.body.append(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
 
 const filePicker = () => foundry.applications?.apps?.FilePicker?.implementation ?? globalThis.FilePicker;
