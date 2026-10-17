@@ -7,7 +7,7 @@ import { newSeed } from "../../core/rng.mjs";
 import { FLAGS, MODULE_ID, SETTINGS, tpl } from "../constants.mjs";
 import { downloadImage, imagesOf, saveToJournal } from "../export.mjs";
 import { esc, has, t } from "../i18n.mjs";
-import { getKind, listKinds } from "../kinds/index.mjs";
+import { allParts, getKind, listKinds } from "../kinds/index.mjs";
 import { SCRIPT_IDS } from "../paper.mjs";
 import { setSetting, setting } from "../settings.mjs";
 import { blankPuzzle, Inbox, players, Puzzles, rebuild, Tables } from "../store.mjs";
@@ -197,7 +197,8 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
   formContext(draft) {
     if (!draft) return {};
-    const kind = this.kind;
+    // Вид — того же черновика, что пришёл в отрисовку: пока она шла, могли выбрать другой шифр.
+    const kind = getKind(draft.kind);
     return {
       kindName: t(`Kind.${kind.id}.name`),
       kindIcon: kind.icon,
@@ -207,7 +208,7 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
   liveContext(draft) {
     if (!draft) return {};
-    const kind = this.kind;
+    const kind = getKind(draft.kind);
     const ctx = {
       status: draft.problem ? kind.problemText(draft.problem) : kind.status(draft),
       problem: Boolean(draft.problem),
@@ -349,10 +350,20 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
     this.render({ parts: ["live"] });
   }
 
-  static async #onCopyCode() {
+  /** Ключ для ведущего — одинаковый для «Копировать» и «Себе в чат»: название, код, пояснения, что читается. */
+  keyOf() {
     const code = this.kind.code(this.draft);
-    const text = [code.line, ...(code.notes ?? [])].filter(Boolean).join("\n");
-    if (!text) return;
+    return {
+      title: this.draft.title || t("Puzzle.untitled"),
+      lines: [code.line, ...(code.notes ?? [])].filter(Boolean),
+      reads: code.reads ?? "",
+    };
+  }
+
+  static async #onCopyCode() {
+    if (!this.draft?.cipher) return;
+    const key = this.keyOf();
+    const text = [key.title, ...key.lines, key.reads && `${t("Code.reads")} ${key.reads}`].filter(Boolean).join("\n");
     try {
       if (game.clipboard?.copyPlainText) await game.clipboard.copyPlainText(text);
       else await navigator.clipboard.writeText(text);
@@ -364,14 +375,14 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
 
   static async #onWhisperCode() {
     if (!this.draft?.cipher) return;
-    const code = this.kind.code(this.draft);
-    const lines = [code.line, ...(code.notes ?? [])].filter(Boolean).map((l) => `<p>${esc(l)}</p>`).join("");
-    const reads = code.reads ? `<p>${esc(t("Code.reads"))} ${esc(code.reads)}</p>` : "";
+    const key = this.keyOf();
+    const lines = key.lines.map((l) => `<p>${esc(l)}</p>`).join("");
+    const reads = key.reads ? `<p>${esc(t("Code.reads"))} <strong>${esc(key.reads)}</strong></p>` : "";
     const Message = (foundry.documents?.ChatMessage ?? globalThis.ChatMessage).implementation;
     await Message.create({
       speaker: { alias: t("Title") },
       whisper: [game.user.id],
-      content: `<p><strong>${esc(this.draft.title)}</strong></p>${lines}${reads}`,
+      content: `<p><strong>${esc(key.title)}</strong></p>${lines}${reads}`,
     });
   }
 
@@ -408,34 +419,53 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
     ViewerApp.open(this.draft.id, { asGM: true });
   }
 
-  /** Выложить на общий стол: всех игроков или выбранных. */
+  /** Выложить на общий стол: что положить (все части или некоторые) и кого посадить. */
   static async #onTableOpen() {
     if (!this.draft?.cipher) return;
     await this.flushSave();
+    const kind = getKind(this.draft.kind);
+    const parts = kind.parts(this.draft);
+    // Сразу отмечено то, что вид кладёт на стол сам (у тайного алфавита — только послание).
+    const preset = kind.tableParts?.(this.draft) ?? allParts(kind, this.draft);
     const people = players();
-    let users = null;
-    if (people.length > 1) {
-      const rows = people
-        .map((u) => `<label class="cp-check"><input type="checkbox" name="u" value="${u.id}" checked> <span>${esc(u.character ? `${u.name} · ${u.character.name}` : u.name)}</span></label>`)
-        .join("");
-      const picked = await DialogV2.wait({
+    let picked = { parts: Object.keys(preset), users: null };
+
+    if (parts.length > 1 || people.length > 1) {
+      const row = (name, value, label, icon, on) =>
+        `<label class="cp-pick__row"><input type="checkbox" name="${name}" value="${esc(value)}"${on ? " checked" : ""}>` +
+        `${icon ? `<i class="${icon}" inert></i>` : ""}<span>${esc(label)}</span></label>`;
+      const sections = [];
+      if (parts.length > 1) {
+        const rows = parts.map((p) => row("part", p.id, t(`Kind.${kind.id}.part.${p.id}`), p.icon, preset[p.id])).join("");
+        sections.push(`<p class="cp-pick__cap">${esc(t("Table.pickParts"))}</p><div class="cp-pick">${rows}</div><p class="cp-pick__hint">${esc(t("Table.pickPartsHint"))}</p>`);
+      }
+      if (people.length > 1) {
+        const rows = people.map((u) => row("u", u.id, u.character ? `${u.name} · ${u.character.name}` : u.name, null, true)).join("");
+        sections.push(`<p class="cp-pick__cap">${esc(t("Table.pickUsers"))}</p><div class="cp-pick">${rows}</div>`);
+      }
+      const checked = (form, name) => [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((i) => i.value);
+      const answer = await DialogV2.wait({
         window: { title: t("Table.pickTitle") },
-        content: `<p>${esc(t("Table.pickText"))}</p><div class="cp-pick">${rows}</div>`,
+        content: sections.join(""),
         buttons: [
           {
             action: "ok",
             label: t("Table.open"),
             default: true,
-            callback: (ev, button) => [...button.form.querySelectorAll('input[name="u"]:checked')].map((i) => i.value),
+            callback: (ev, button) => ({ parts: checked(button.form, "part"), users: checked(button.form, "u") }),
           },
           { action: "cancel", label: t("Common.cancel") },
         ],
         rejectClose: false,
       });
-      if (!Array.isArray(picked)) return;
-      users = picked.length === people.length ? null : picked;
+      if (!answer || typeof answer !== "object") return;
+      if (parts.length > 1) picked.parts = answer.parts;
+      if (people.length > 1) picked.users = answer.users.length === people.length ? null : answer.users;
+      if (!picked.parts.length) return ui.notifications.warn(t("Table.noParts"));
+      if (picked.users?.length === 0) return ui.notifications.warn(t("Table.noUsers"));
     }
-    await Tables.open(this.draft, { users });
+
+    await Tables.open(this.draft, { users: picked.users, parts: Object.fromEntries(picked.parts.map((id) => [id, true])) });
     ViewerApp.open(this.draft.id, { shared: true });
   }
 

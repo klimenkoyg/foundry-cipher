@@ -15,7 +15,7 @@
         {{#each notes}}<p class="cp-loop"><i class="fa-solid fa-circle-info" inert></i> {{this}}</p>{{/each}}
         {{#if reads}}<p class="cp-reads">{{cpT "Code.reads"}} <b>{{reads}}</b></p>{{/if}}
         <div class="cp-actions">
-          {{#if code}}<button type="button" class="cp-btn" data-action="copyCode"><i class="fa-solid fa-copy" inert></i> {{cpT "Code.copy"}}</button>{{/if}}
+          <button type="button" class="cp-btn" data-action="copyCode"><i class="fa-solid fa-copy" inert></i> {{cpT "Code.copy"}}</button>
           <button type="button" class="cp-btn" data-action="whisperCode"><i class="fa-solid fa-comment-dots" inert></i> {{cpT "Code.whisper"}}</button>
           {{#if shuffle}}<button type="button" class="cp-btn" data-action="shuffle" data-tooltip="{{cpT 'Code.shuffleHint'}}"><i class="fa-solid fa-shuffle" inert></i> {{cpT "Code.shuffle"}}</button>{{/if}}
         </div>

@@ -1004,6 +1004,43 @@
   margin: 8px 0;
 }
 
+/* Диалог «Выложить на общий стол»: что положить и кого посадить. */
+.cp-pick__cap {
+  margin: 10px 0 0;
+  font-weight: 700;
+}
+
+.cp-pick__cap:first-child {
+  margin-top: 0;
+}
+
+.cp-pick__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.cp-pick__row input {
+  flex: none;
+  margin: 0;
+}
+
+.cp-pick__row > i {
+  flex: none;
+  width: 16px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.cp-pick__hint {
+  margin: 0 0 4px;
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
 /* ---------- список у игрока ---------- */
 
 .cp-inbox-app .cp-inbox {
