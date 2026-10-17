@@ -2,6 +2,7 @@
    Ядро — scripts/core/grille.mjs; здесь поля мастерской, рисунки, окно игрока и картинки. */
 
 import { autoSize, formatSteps, generate, holesAt, maxLetters, orientations, SIZE, stepCells, stepText } from "../../core/grille.mjs";
+import { hasCyrillic } from "../../core/alphabet.mjs";
 import { esc, plural, t } from "../i18n.mjs";
 import { fit, INK, INK_SOFT, LIT, paper, scriptAttrs, SERIF, svgOpen, uid, xml } from "../paper.mjs";
 import { bindPlate, plateStyle, plateSvg, ROMAN } from "../plate.mjs";
@@ -115,7 +116,8 @@ export default {
       group: [
         { name: "rows", type: "number", min: SIZE.min, max: SIZE.max, auto: true },
         { name: "dirs", type: "select", options: ["mixed", "cw"] },
-        { name: "yo", type: "checkbox" },
+        // «Ё как Е» нужна только русской фразе.
+        { name: "yo", type: "checkbox", when: (p) => hasCyrillic(p.phrase) },
       ],
     },
   ],
@@ -284,17 +286,27 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Шифр Архимага",
-    phrase: [
-      "ТВОЙОТЕЦНИВЧЕМНЕВИНОВАТОНМОЛЧАЛПОМОЕ",
-      "МУСЛОВУПРОСТИМЕНЯЗАЙДИВПЕРОИПЕПЕЛСКА",
-      "ЖИСЛОВОПРАВДААРХИМАГАПОТОМПРОВЕРЬГРО",
-      "БИНЕДОПУСТИВОЙНЫ",
-    ].join("\n"),
-    head: "Элеции. Лично.",
-    foot: "Пустая чаша вмещает всё. — Л.",
-    seed: 20261017,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "The Archmage's Cipher",
+          phrase: "Your father is innocent. He kept silent at my word. Forgive me. Go to the Quill and Ash and say the word: the Archmage's truth. Then check the tomb and stop the war.",
+          head: "To Elecia. In person.",
+          foot: "An empty cup holds everything. — L.",
+          seed: 20261017,
+        }
+      : {
+          title: "Шифр Архимага",
+          phrase: [
+            "ТВОЙОТЕЦНИВЧЕМНЕВИНОВАТОНМОЛЧАЛПОМОЕ",
+            "МУСЛОВУПРОСТИМЕНЯЗАЙДИВПЕРОИПЕПЕЛСКА",
+            "ЖИСЛОВОПРАВДААРХИМАГАПОТОМПРОВЕРЬГРО",
+            "БИНЕДОПУСТИВОЙНЫ",
+          ].join("\n"),
+          head: "Элеции. Лично.",
+          foot: "Пустая чаша вмещает всё. — Л.",
+          seed: 20261017,
+        },
 };
 

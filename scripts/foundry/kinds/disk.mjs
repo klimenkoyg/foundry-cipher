@@ -541,12 +541,23 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Записка у мельницы",
-    phrase: "Встречаемся у старой мельницы в полночь. Приходи один.",
-    key: "К",
-    keyword: "",
-    spaces: true,
-    seed: 20261017,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "A note by the mill",
+          phrase: "Meet me at the old mill at midnight. Come alone.",
+          key: "K",
+          keyword: "",
+          spaces: true,
+          seed: 20261017,
+        }
+      : {
+          title: "Записка у мельницы",
+          phrase: "Встречаемся у старой мельницы в полночь. Приходи один.",
+          key: "К",
+          keyword: "",
+          spaces: true,
+          seed: 20261017,
+        },
 };

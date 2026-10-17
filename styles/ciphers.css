@@ -70,6 +70,11 @@
   color: var(--cp-text);
 }
 
+/* hidden сильнее display у меток полей и кнопок модуля */
+.ssl-ciphers [hidden] {
+  display: none !important;
+}
+
 .ssl-ciphers :focus-visible {
   outline: 2px solid var(--cp-accent);
   outline-offset: 2px;

@@ -351,16 +351,27 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Письмо из Ольховки",
-    visible: [
-      "Пишу с оказией, пока обоз не ушёл. Будь добра, пришли к Зимнему празднику серой шерсти потолще — на две пары чулок — и горшочек липового мёда: здешний горчит.",
-      "У нас всё по-старому. Мельник опять бранится с кузнецом из-за межи, вдова Агна выдаёт дочку за сына пекаря, а у старосты окотилась кошка — котят раздали по дворам.",
-      "Кланяйся дяде Тобиасу и не хворай.",
-    ].join("\n"),
-    hidden: "Казначей продал нас.\nВстреча в часовне в полночь.",
-    head: "Любезная тётушка Марта!",
-    foot: "Любящая тебя Лисса",
-    seed: 20261017,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "A letter from Alderbrook",
+          visible: "I write in haste while the caravan waits. Be so kind as to send me some thick grey wool for the Winter feast — enough for two pairs of stockings — and a little pot of linden honey: the local one is bitter.\nAll is as it was here. The miller quarrels with the smith over the boundary again, the widow Agna is marrying her daughter to the baker's son, and the headman's cat has had kittens — they were given away to every yard.\nGive my regards to uncle Tobias and keep well.",
+          hidden: "The treasurer sold us.\nMeet in the chapel at midnight.",
+          head: "Dear aunt Martha!",
+          foot: "Your loving Lissa",
+          seed: 20261017,
+        }
+      : {
+          title: "Письмо из Ольховки",
+          visible: [
+            "Пишу с оказией, пока обоз не ушёл. Будь добра, пришли к Зимнему празднику серой шерсти потолще — на две пары чулок — и горшочек липового мёда: здешний горчит.",
+            "У нас всё по-старому. Мельник опять бранится с кузнецом из-за межи, вдова Агна выдаёт дочку за сына пекаря, а у старосты окотилась кошка — котят раздали по дворам.",
+            "Кланяйся дяде Тобиасу и не хворай.",
+          ].join("\n"),
+          hidden: "Казначей продал нас.\nВстреча в часовне в полночь.",
+          head: "Любезная тётушка Марта!",
+          foot: "Любящая тебя Лисса",
+          seed: 20261017,
+        },
 };

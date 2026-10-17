@@ -3,6 +3,7 @@
    Ядро — scripts/core/stencil.mjs; здесь поля мастерской, рисунки, окно игрока и картинки. */
 
 import { cellsOfSlots, generate, readCells, slotsOf, WIDTH } from "../../core/stencil.mjs";
+import { hasCyrillic } from "../../core/alphabet.mjs";
 import { esc, plural, t } from "../i18n.mjs";
 import { INK, LIT, num, paper, scriptAttrs, svgOpen, uid, xml } from "../paper.mjs";
 import { bindPlate, plateStyle, plateSvg } from "../plate.mjs";
@@ -152,7 +153,8 @@ export default {
     {
       group: [
         { name: "width", type: "number", min: WIDTH.min, max: WIDTH.max, auto: true },
-        { name: "yo", type: "checkbox" },
+        // «Ё как Е» нужна только русской фразе.
+        { name: "yo", type: "checkbox", when: (p) => hasCyrillic(p.phrase) || hasCyrillic(p.cover) },
       ],
     },
   ],
@@ -277,14 +279,23 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Письмо тётушке Агате",
-    cover: [
-      "Милая тётушка Агата, здравствуйте!",
-      "У нас всё мирно, урожай славный: яблоки крупные, капуста тугая. В субботу возили мёд на ярмарку, продали всё до капли. Днём тепло, по утрам туман над рекой. Кланяйтесь дядюшке, а сестрице Вете передайте, что я скучаю.",
-      "Ваш любящий племянник Тим",
-    ].join("\n"),
-    phrase: "Замок падёт на рассвете",
-    seed: 28,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "A letter to aunt Agatha",
+          cover: "Dear aunt Agatha, greetings!\nAll is quiet here and the harvest is a good one: the apples are large and the cabbages firm. On Saturday we took our honey to the fair and sold every last drop. The days are warm, and in the mornings a mist lies over the river. Father sends his love and asks after all of you. Give my regards to uncle, and tell my sister Veta that I miss her dearly. Write soon with all the news from town; we wait for the dawn post.\nYour loving nephew Tim",
+          phrase: "The castle falls at dawn",
+          seed: 28,
+        }
+      : {
+          title: "Письмо тётушке Агате",
+          cover: [
+            "Милая тётушка Агата, здравствуйте!",
+            "У нас всё мирно, урожай славный: яблоки крупные, капуста тугая. В субботу возили мёд на ярмарку, продали всё до капли. Днём тепло, по утрам туман над рекой. Кланяйтесь дядюшке, а сестрице Вете передайте, что я скучаю.",
+            "Ваш любящий племянник Тим",
+          ].join("\n"),
+          phrase: "Замок падёт на рассвете",
+          seed: 28,
+        },
 };

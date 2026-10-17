@@ -18,7 +18,7 @@ rmSync(dist, { recursive: true, force: true });
 mkdirSync(stage, { recursive: true });
 
 // В архив идёт только то, что нужно Foundry: без тестов и стенда.
-for (const item of ["scripts", "styles", "templates", "lang", "fonts", "LICENSE", "README.md", "CHANGELOG.md"]) {
+for (const item of ["scripts", "styles", "templates", "lang", "fonts", "LICENSE", "README.md", "README.en.md", "CHANGELOG.md"]) {
   cpSync(join(root, item), join(stage, item), { recursive: true });
 }
 writeFileSync(join(stage, "module.json"), `${JSON.stringify(manifest, null, 2)}\n`);

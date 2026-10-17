@@ -615,12 +615,23 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Знаки на алтаре",
-    phrase: "Седьмая жертва откроет врата бездны",
-    style: "sigils",
-    fragments: 3,
-    spaces: true,
-    seed: 6660613,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "Signs on the altar",
+          phrase: "The seventh sacrifice opens the gates of the abyss",
+          style: "sigils",
+          fragments: 3,
+          spaces: true,
+          seed: 6660613,
+        }
+      : {
+          title: "Знаки на алтаре",
+          phrase: "Седьмая жертва откроет врата бездны",
+          style: "sigils",
+          fragments: 3,
+          spaces: true,
+          seed: 6660613,
+        },
 };

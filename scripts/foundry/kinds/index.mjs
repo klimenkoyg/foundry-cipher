@@ -3,7 +3,8 @@
    id, icon                       — имя и значок (Font Awesome)
    defaults()                     — поля нового шифра этого вида
    fields                         — поля мастерской: { name, type: text|textarea|number|select|checkbox, wide, rows,
-                                    min, max, auto, options, style: prose|italic|title } или { group: [поля] }.
+                                    min, max, auto, options, style: prose|italic|title, when(puzzle) } или { group: [поля] }.
+                                    when — показывать поле, только если для шифра это правда (проверяется и при наборе).
                                     Подписи: Kind.<id>.field.<name>, подсказка в поле — …<name>Hint,
                                     всплывающая — …<name>Tip, варианты выбора — …<name>_<значение>.
    rebuildOn                      — какие поля пересобирают шифр (остальные меняют только рисунок)

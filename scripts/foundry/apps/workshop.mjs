@@ -61,6 +61,7 @@ function fieldContext(kind, draft, f) {
     isNumber: f.type === "number",
     isSelect: f.type === "select",
     isCheckbox: f.type === "checkbox",
+    hidden: f.when ? !f.when(draft) : false,
     options: (f.options ?? []).map((v) => ({ value: v, label: f.name === "script" ? t(`Script.${v}`) : t(`${key}_${v}`), selected: value === v })),
   };
 }
@@ -286,10 +287,22 @@ export class WorkshopApp extends HandlebarsApplicationMixin(ApplicationV2) {
     if (this.draft[el.name] === value) return;
     this.draft[el.name] = value;
     if (el.name !== "title") this.draft = rebuild(this.draft);
+    this.syncFields();
     this.queueSave();
     clearTimeout(this.liveTimer);
     const typing = el.tagName === "TEXTAREA" || el.type === "text";
     this.liveTimer = setTimeout(() => this.render({ parts: el.name === "title" ? ["list", "live"] : ["live"] }), typing ? 140 : 0);
+  }
+
+  /** Поля с условием (when) появляются и прячутся сразу при наборе — форма не перерисовывается. */
+  syncFields() {
+    const form = this.element?.querySelector(".cp-form");
+    if (!form || !this.draft) return;
+    for (const f of fieldsOf(this.kind).flatMap((x) => x.group ?? [x])) {
+      if (!f.when) continue;
+      const box = form.querySelector(`[data-field="${f.name}"]`);
+      if (box) box.hidden = !f.when(this.draft);
+    }
   }
 
   queueSave() {

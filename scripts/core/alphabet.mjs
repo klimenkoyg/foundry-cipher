@@ -17,6 +17,9 @@ const FREQ = {
 
 export const ALPHABETS = Object.fromEntries(Object.entries(FREQ).map(([id, f]) => [id, Object.keys(f).join("")]));
 
+/** Есть ли в тексте русские буквы — например, нужна ли настройка «Ё как Е». */
+export const hasCyrillic = (text) => /[А-ЯЁа-яё]/.test(String(text ?? ""));
+
 /**
  * Фраза → только буквы одного алфавита, заглавные.
  * Алфавит — тот, чьих букв во фразе больше. yo: «Ё» пишется как «Е».

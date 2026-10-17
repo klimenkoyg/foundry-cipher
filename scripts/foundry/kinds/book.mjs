@@ -430,18 +430,29 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Записка странника",
-    bookTitle: "Хроники Белого Шпиля",
-    source: [
-      "В год Пепельной луны колокол Белого Шпиля трижды прозвонил в полночь, хотя звонаря в башне не было. Летописец Ормунд записал это в тот же час, и рука его дрожала.",
-      "Наутро у ворот появился странник в сером плаще. Он не назвал имени, но попросил хлеба и места у огня. Стража впустила его: он знал старое слово привратников, забытое ещё при прежнем магистре.",
-      "Три ночи странник сидел в библиотеке и читал при одной свече. На четвёртую ночь свеча погасла сама, а в зале запахло морской солью, хотя до моря сорок лиг пути на запад. Утром на полях старых хроник нашли пометки, сделанные чужой рукой.",
-      "Говорят, под северной лестницей есть дверь, которую не открывали со времён основателей. Ключ от неё утонул вместе с первым магистром, а замок отзывается только на живой голос. Многие пытались подобрать слово, но дверь молчит уже триста лет.",
-      "Когда странник ушёл, на столе осталась записка из одних чисел. Ормунд долго смотрел на неё, потом закрыл хронику и не брал пера до самой весны.",
-    ].join("\n"),
-    phrase: "Голос откроет северную дверь",
-    mode: "words",
-    seed: 20261017,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "The wanderer's note",
+          bookTitle: "Chronicles of the White Spire",
+          source: "In the year of the Ashen Moon the bell of the White Spire rang three times at midnight, though no ringer was in the tower. The chronicler Ormund wrote it down that very hour, and his hand was shaking.\nIn the morning a wanderer in a grey cloak stood at the gate. He gave no name, but asked for bread and a place by the fire. The guards let him in: he knew the old word of the gatekeepers, forgotten since the days of the former master.\nFor three nights the wanderer sat in the library and read by a single candle. On the fourth night the candle went out by itself, and the hall smelled of sea salt, though the sea lies forty leagues to the west. In the morning strange notes were found in the margins of the old chronicles.\nThey say that beneath the northern stair there is a door no one has opened since the days of the founders. Its key sank with the first master, and the lock answers only to a living voice. Many have tried to find the word, but the door has kept silent for three hundred years.\nWhen the wanderer left, a note of nothing but numbers lay on the table. Ormund looked at it for a long time, then closed the chronicle and did not take up his pen until spring.",
+          phrase: "The voice opens the northern door",
+          mode: "words",
+          seed: 20261017,
+        }
+      : {
+          title: "Записка странника",
+          bookTitle: "Хроники Белого Шпиля",
+          source: [
+            "В год Пепельной луны колокол Белого Шпиля трижды прозвонил в полночь, хотя звонаря в башне не было. Летописец Ормунд записал это в тот же час, и рука его дрожала.",
+            "Наутро у ворот появился странник в сером плаще. Он не назвал имени, но попросил хлеба и места у огня. Стража впустила его: он знал старое слово привратников, забытое ещё при прежнем магистре.",
+            "Три ночи странник сидел в библиотеке и читал при одной свече. На четвёртую ночь свеча погасла сама, а в зале запахло морской солью, хотя до моря сорок лиг пути на запад. Утром на полях старых хроник нашли пометки, сделанные чужой рукой.",
+            "Говорят, под северной лестницей есть дверь, которую не открывали со времён основателей. Ключ от неё утонул вместе с первым магистром, а замок отзывается только на живой голос. Многие пытались подобрать слово, но дверь молчит уже триста лет.",
+            "Когда странник ушёл, на столе осталась записка из одних чисел. Ормунд долго смотрел на неё, потом закрыл хронику и не брал пера до самой весны.",
+          ].join("\n"),
+          phrase: "Голос откроет северную дверь",
+          mode: "words",
+          seed: 20261017,
+        },
 };

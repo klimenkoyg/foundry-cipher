@@ -3,6 +3,7 @@
    Ядро — scripts/core/scytale.mjs; здесь поля мастерской, рисунки, окно игрока и картинки. */
 
 import { FACES, generate, isTail, MAX_LETTERS, WIND } from "../../core/scytale.mjs";
+import { hasCyrillic } from "../../core/alphabet.mjs";
 import { esc, plural, t } from "../i18n.mjs";
 import { brass, INK, INK_SOFT, LIT, num, paper, scriptAttrs, SERIF, SERIF_SC, svgOpen, uid, xml } from "../paper.mjs";
 
@@ -333,7 +334,8 @@ export default {
     {
       group: [
         { name: "faces", type: "number", min: FACES.min, max: FACES.max, auto: true },
-        { name: "yo", type: "checkbox" },
+        // «Ё как Е» нужна только русской фразе.
+        { name: "yo", type: "checkbox", when: (p) => hasCyrillic(p.phrase) },
       ],
     },
   ],
@@ -514,10 +516,19 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Приказ коменданта",
-    phrase: "Гарнизон уходит к перевалу на рассвете. Ворота открыть",
-    faces: 6,
-    seed: 20261017,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "The commandant's order",
+          phrase: "The garrison leaves for the pass at dawn. Open the gates",
+          faces: 6,
+          seed: 20261017,
+        }
+      : {
+          title: "Приказ коменданта",
+          phrase: "Гарнизон уходит к перевалу на рассвете. Ворота открыть",
+          faces: 6,
+          seed: 20261017,
+        },
 };

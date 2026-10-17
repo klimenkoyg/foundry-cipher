@@ -886,10 +886,19 @@ export default {
     ];
   },
 
-  demo: () => ({
-    title: "Стук из-за стены",
-    phrase: "Завтра побег. Жди!",
-    speed: "normal",
-    seed: 1825,
-  }),
+  // Пример для стенда и снимков README — на языке интерфейса.
+  demo: () =>
+    globalThis.game?.i18n?.lang === "en"
+      ? {
+          title: "Knocks through the wall",
+          phrase: "Escape tomorrow. Wait!",
+          speed: "normal",
+          seed: 1825,
+        }
+      : {
+          title: "Стук из-за стены",
+          phrase: "Завтра побег. Жди!",
+          speed: "normal",
+          seed: 1825,
+        },
 };
