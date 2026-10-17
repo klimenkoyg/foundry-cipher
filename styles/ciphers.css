@@ -75,6 +75,22 @@
   outline-offset: 2px;
 }
 
+/* Foundry задаёт кнопкам и пунктам списков свою высоту (и наименьшую), интервал, перенос, шрифт
+   и тень текста. В окнах модуля всё это своё: без сброса многострочные пункты меню сплющиваются
+   и налезают друг на друга. :where — нулевой вес: любое правило модуля для конкретной кнопки сильнее. */
+:where(.ssl-ciphers) button {
+  min-height: 0;
+  max-height: none;
+  font-family: var(--cp-ui);
+  line-height: 1.25;
+  text-shadow: none;
+}
+
+:where(.ssl-ciphers) :is(ul, ol) > li {
+  min-height: 0;
+  line-height: inherit;
+}
+
 .ssl-ciphers .cp-btn {
   display: inline-flex;
   flex: 0 0 auto;
@@ -511,6 +527,12 @@
   list-style: none;
 }
 
+.cp-workshop-app .cp-shelf__list > li {
+  display: block;
+  flex: none;
+  margin: 0;
+}
+
 .cp-workshop-app .cp-shelf__empty {
   padding: 6px;
   color: var(--cp-faint);
@@ -520,6 +542,7 @@
   display: grid;
   grid-template-columns: 18px minmax(0, 1fr) auto;
   gap: 2px 8px;
+  flex: none;
   width: 100%;
   height: auto;
   margin: 0;
@@ -528,6 +551,8 @@
   border-radius: var(--cp-r);
   background: none;
   color: var(--cp-text);
+  font-size: 14px;
+  white-space: normal;
   text-align: left;
   cursor: pointer;
   box-shadow: none;
@@ -921,10 +946,13 @@
 
 .cp-workshop-app .cp-kinds__item {
   display: grid;
+  flex: none;
   grid-template-columns: 22px minmax(0, 1fr);
   gap: 1px 8px;
   width: 100%;
   height: auto;
+  font-size: 14px;
+  white-space: normal;
   margin: 0;
   padding: 7px 8px;
   border: 1px solid transparent;

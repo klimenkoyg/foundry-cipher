@@ -39,6 +39,8 @@ for (const href of manifest.styles) {
   link.href = `/${href}`;
   document.head.insertBefore(link, document.head.querySelector('link[href="harness.css"]'));
 }
+// ?hostile=1 — «враждебные» стили, как у Foundry: проверка, что окна модуля их перекрывают.
+if (params.has("hostile")) document.head.append(Object.assign(document.createElement("link"), { rel: "stylesheet", href: "hostile.css" }));
 const merge = (a, b) => {
   for (const [k, v] of Object.entries(b)) a[k] = v && typeof v === "object" && !Array.isArray(v) ? merge(a[k] ?? {}, v) : v;
   return a;
@@ -105,7 +107,55 @@ console.error = (...args) => {
 };
 window.addEventListener("unhandledrejection", (e) => errors.push(`unhandled: ${e.reason?.stack ?? e.reason}`));
 window.addEventListener("error", (e) => errors.push(`error: ${e.message}`));
-window.__ciphers = { errors, Puzzles, Tables, Inbox, setUser: (id) => setUser(users.find((u) => u.id === id)), demoPuzzle };
+/** Проверка вёрстки окон модуля: кнопки с обрезанным текстом и налезающие друг на друга строки.
+    Видимое считается с учётом прокрутки: то, что спрятано за краем списка, не в счёт. Удобно с ?hostile=1. */
+function audit() {
+  const issues = [];
+  const name = (el) => `${el.tagName.toLowerCase()}.${[...el.classList].join(".")} «${(el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 28)}»`;
+  const clip = (el) => {
+    let r = { left: -1e9, top: -1e9, right: 1e9, bottom: 1e9 };
+    for (let p = el.parentElement; p; p = p.parentElement) {
+      const cs = getComputedStyle(p);
+      if (!/(auto|scroll|hidden|clip)/.test(cs.overflow + cs.overflowX + cs.overflowY)) continue;
+      const pr = p.getBoundingClientRect();
+      r = { left: Math.max(r.left, pr.left), top: Math.max(r.top, pr.top), right: Math.min(r.right, pr.right), bottom: Math.min(r.bottom, pr.bottom) };
+    }
+    return r;
+  };
+  const shown = (el) => {
+    const cs = getComputedStyle(el);
+    if (cs.visibility === "hidden" || cs.display === "none") return null;
+    const r = el.getBoundingClientRect();
+    const c = clip(el);
+    const box = { left: Math.max(r.left, c.left), top: Math.max(r.top, c.top), right: Math.min(r.right, c.right), bottom: Math.min(r.bottom, c.bottom) };
+    return box.right - box.left > 1 && box.bottom - box.top > 1 ? box : null;
+  };
+  for (const win of document.querySelectorAll(".ssl-ciphers")) {
+    for (const b of win.querySelectorAll("button")) {
+      if (!shown(b)) continue;
+      if (b.scrollHeight > b.clientHeight + 2) issues.push(`обрезан по высоте: ${name(b)}`);
+      if (b.scrollWidth > b.clientWidth + 2 && getComputedStyle(b).textOverflow !== "ellipsis") issues.push(`обрезан по ширине: ${name(b)}`);
+    }
+    const texts = [...win.querySelectorAll("*")]
+      .filter((el) => !el.closest("svg") && getComputedStyle(el).position !== "absolute")
+      .filter((el) => [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim()))
+      .map((el) => [el, shown(el)])
+      .filter(([, r]) => r);
+    for (let i = 0; i < texts.length; i++) {
+      for (let j = i + 1; j < texts.length; j++) {
+        const [a, ra] = texts[i];
+        const [b, rb] = texts[j];
+        if (a.contains(b) || b.contains(a)) continue;
+        const w = Math.min(ra.right, rb.right) - Math.max(ra.left, rb.left);
+        const h = Math.min(ra.bottom, rb.bottom) - Math.max(ra.top, rb.top);
+        if (w > 3 && h > 3) issues.push(`налезают: ${name(a)} ↔ ${name(b)}`);
+      }
+    }
+  }
+  return [...new Set(issues)];
+}
+
+window.__ciphers = { errors, Puzzles, Tables, Inbox, setUser: (id) => setUser(users.find((u) => u.id === id)), demoPuzzle, audit };
 
 /* ---------- сценарии для снимков ---------- */
 const scene = params.get("scene");
