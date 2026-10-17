@@ -2,7 +2,7 @@
   "id": "ssl_ciphers",
   "title": "Тайнопись · Ciphers & Puzzles",
   "description": "<p>Шифры и головоломки для Foundry VTT. Первая — поворотная решётка: ведущий пишет фразу и выбирает число строк, модуль собирает письмо с буквами, латунную пластину с окошками и код поворотов. Игрокам можно выдать письмо, пластину или всё вместе: пластину кладут на письмо, крутят и читают фразу. Картинки — в PNG и в журнал.</p><p>Ciphers and puzzles for Foundry VTT. The first one is a turning grille: the GM types a phrase and picks the number of rows; the module builds a letter, a brass grille and a turning code. Hand players the letter, the grille or both: they lay the grille on the letter, turn it and read the phrase. Export images as PNG or to a journal. Russian and English.</p>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     {
       "name": "Yuriy Klimenko",
@@ -121,7 +121,7 @@
   ],
   "url": "https://github.com/klimenkoyg/foundry-cipher",
   "manifest": "https://github.com/klimenkoyg/foundry-cipher/releases/latest/download/module.json",
-  "download": "https://github.com/klimenkoyg/foundry-cipher/releases/download/v0.1.0/module.zip",
+  "download": "https://github.com/klimenkoyg/foundry-cipher/releases/download/v0.1.1/module.zip",
   "readme": "https://github.com/klimenkoyg/foundry-cipher/blob/main/README.md",
   "bugs": "https://github.com/klimenkoyg/foundry-cipher/issues",
   "changelog": "https://github.com/klimenkoyg/foundry-cipher/blob/main/CHANGELOG.md",

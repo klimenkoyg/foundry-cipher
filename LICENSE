@@ -19,8 +19,9 @@
 - выдавать модуль за своё, убирать имя автора и этот текст.
 
 Шрифты Alegreya, Alegreya SC и Alegreya Sans (папка fonts/) распространяются
-по лицензии SIL Open Font License 1.1 — см. fonts/OFL.txt. На них запреты выше
-не действуют.
+по лицензии SIL Open Font License 1.1 — см. fonts/OFL.txt. Рукописные шрифты
+Marck Script, Caveat, Neucha и Kurale (там же) — тоже по SIL Open Font License 1.1,
+см. fonts/OFL-handwriting.txt. На все эти шрифты запреты выше не действуют.
 
 Модуль поставляется «как есть», без каких-либо гарантий.
 
@@ -47,7 +48,10 @@ You may not, without the author's written consent:
 
 The Alegreya, Alegreya SC and Alegreya Sans fonts (the fonts/ folder) are
 licensed under the SIL Open Font License 1.1 — see fonts/OFL.txt. The
-restrictions above do not apply to them.
+handwriting fonts Marck Script, Caveat, Neucha and Kurale (same folder) are
+also licensed under the SIL Open Font License 1.1 — see
+fonts/OFL-handwriting.txt. The restrictions above do not apply to any of
+these fonts.
 
 The module is provided “as is”, without warranty of any kind.
 
