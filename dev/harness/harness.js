@@ -40,7 +40,11 @@ for (const href of manifest.styles) {
   document.head.insertBefore(link, document.head.querySelector('link[href="harness.css"]'));
 }
 // ?hostile=1 — «враждебные» стили, как у Foundry: проверка, что окна модуля их перекрывают.
-if (params.has("hostile")) document.head.append(Object.assign(document.createElement("link"), { rel: "stylesheet", href: "hostile.css" }));
+// Font Awesome тогда подключается из hostile.css в слое, как у Foundry, а не отдельно.
+if (params.has("hostile")) {
+  document.querySelector('link[href*="font-awesome"]')?.remove();
+  document.head.append(Object.assign(document.createElement("link"), { rel: "stylesheet", href: "hostile.css" }));
+}
 const merge = (a, b) => {
   for (const [k, v] of Object.entries(b)) a[k] = v && typeof v === "object" && !Array.isArray(v) ? merge(a[k] ?? {}, v) : v;
   return a;
@@ -107,7 +111,8 @@ console.error = (...args) => {
 };
 window.addEventListener("unhandledrejection", (e) => errors.push(`unhandled: ${e.reason?.stack ?? e.reason}`));
 window.addEventListener("error", (e) => errors.push(`error: ${e.message}`));
-/** Проверка вёрстки окон модуля: кнопки с обрезанным текстом и налезающие друг на друга строки.
+/** Проверка вёрстки окон модуля: кнопки с обрезанным текстом, налезающие друг на друга строки
+    и значки Font Awesome, оставшиеся без своего шрифта.
     Видимое считается с учётом прокрутки: то, что спрятано за краем списка, не в счёт. Удобно с ?hostile=1. */
 function audit() {
   const issues = [];
@@ -131,6 +136,9 @@ function audit() {
     return box.right - box.left > 1 && box.bottom - box.top > 1 ? box : null;
   };
   for (const win of document.querySelectorAll(".ssl-ciphers")) {
+    for (const icon of win.querySelectorAll('[class*="fa-solid"], [class*="fa-regular"]')) {
+      if (shown(icon) && !/Font Awesome/i.test(getComputedStyle(icon).fontFamily)) issues.push(`значок без своего шрифта: ${name(icon)} ${icon.className}`);
+    }
     for (const b of win.querySelectorAll("button")) {
       if (!shown(b)) continue;
       if (b.scrollHeight > b.clientHeight + 2) issues.push(`обрезан по высоте: ${name(b)}`);

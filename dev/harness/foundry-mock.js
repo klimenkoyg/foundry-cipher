@@ -317,7 +317,8 @@
         <header class="window-header">
           <i class="window-icon ${this.options.window?.icon ?? ""}"></i>
           <h1 class="window-title"></h1>
-          <button type="button" class="header-control fa-solid fa-xmark" data-action="close" aria-label="Закрыть"></button>
+          <button type="button" class="header-control icon fa-solid fa-ellipsis-vertical" data-action="toggleControls" aria-label="Ещё"></button>
+          <button type="button" class="header-control icon fa-solid fa-xmark" data-action="close" aria-label="Закрыть"></button>
         </header>
         <section class="window-content"></section>
         ${this.options.window?.resizable ? '<div class="window-resize-handle"></div>' : ""}`;

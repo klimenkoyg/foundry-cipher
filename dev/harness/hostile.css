@@ -1,9 +1,13 @@
 /* «Враждебные» стили в слое — как у Foundry v13: у кнопок своя высота, наименьшая высота,
    межстрочный интервал и запрет переноса, у списков и заголовков — отступы и рамки.
    Если окно модуля от этого ломается, значит, стили модуля чего-то не перекрывают.
+   Font Awesome тоже в слое, как у Foundry: любое правило модуля вне слоя сильнее его — так видно,
+   если модуль случайно перебьёт шрифт значка.
    Включается так: ?hostile=1. */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css") layer(foundry);
+
 @layer foundry {
-  .application button {
+  .application .window-content button {
     display: flex; align-items: center; justify-content: center; gap: 6px; flex: 0 1 auto;
     width: 100%; height: 32px; min-height: 32px; max-height: 32px;
     padding: 0 8px; margin: 2px 0; border: 2px solid magenta; border-radius: 3px; background: #777; color: lime;

@@ -116,8 +116,9 @@ npm run build     # dist/module.zip и dist/module.json
   `styles/kinds/<вид>.css` — стили вида.
 - `dev/harness/` — стенд с имитацией Foundry: настоящий код модуля в обычном браузере.
   Запуск: `python3 -m http.server 8766 --bind 127.0.0.1`, затем `http://127.0.0.1:8766/dev/harness/`.
-  `?hostile=1` подключает «враждебные» стили, как у Foundry; `__ciphers.audit()` в консоли находит
-  обрезанные кнопки и налезающие строки во всех окнах модуля.
+  `?hostile=1` подключает «враждебные» стили, как у Foundry (и Font Awesome в слое, как у неё);
+  `__ciphers.audit()` в консоли находит обрезанные кнопки, налезающие строки и значки без своего
+  шрифта во всех окнах модуля.
 - `scripts-dev/shot.sh` — снимок стенда безголовым Chrome:
   `scripts-dev/shot.sh player out.png 1440 900 "&kind=disk"` (сцены `workshop`, `player`, `table`, `export`).
 

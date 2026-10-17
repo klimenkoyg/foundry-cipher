@@ -77,8 +77,10 @@
 
 /* Foundry задаёт кнопкам и пунктам списков свою высоту (и наименьшую), интервал, перенос, шрифт
    и тень текста. В окнах модуля всё это своё: без сброса многострочные пункты меню сплющиваются
-   и налезают друг на друга. :where — нулевой вес: любое правило модуля для конкретной кнопки сильнее. */
-:where(.ssl-ciphers) button {
+   и налезают друг на друга. :where — нулевой вес: любое правило модуля для конкретной кнопки сильнее.
+   Только внутри окна: заголовок с кнопками «закрыть» и «⋮» — Foundry, а значки Font Awesome
+   рисуются шрифтом самой кнопки, и чужой шрифт их стирает. */
+:where(.ssl-ciphers .window-content) button:not([class*="fa-"]) {
   min-height: 0;
   max-height: none;
   font-family: var(--cp-ui);
@@ -86,7 +88,7 @@
   text-shadow: none;
 }
 
-:where(.ssl-ciphers) :is(ul, ol) > li {
+:where(.ssl-ciphers .window-content) :is(ul, ol) > li {
   min-height: 0;
   line-height: inherit;
 }
