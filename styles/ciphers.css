@@ -437,14 +437,6 @@
   text-align: center;
 }
 
-.ssl-ciphers .cp-hint {
-  margin: 0;
-  color: var(--cp-faint);
-  font-size: 12.5px;
-  text-align: center;
-  text-wrap: balance;
-}
-
 .cp-viewer-app .cp-notes {
   display: flex;
   min-height: 0;

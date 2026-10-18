@@ -2,7 +2,7 @@
   "id": "ssl_ciphers",
   "title": "Тайнопись · Ciphers & Puzzles",
   "description": "<p>Шифры и головоломки для Foundry VTT. Ведущий пишет текст, а модуль собирает из него реквизит: поворотную решётку с латунной пластиной, письмо с секретом (трафарет Кардано), шифровальный диск, тайный алфавит с обрывками ключа, книжный шифр, скиталу, перестук из-за стены и невидимые чернила. Части можно раздать игрокам — письмо одному, пластину другому — или выложить шифр на общий стол, где все крутят и читают вместе. Реквизит написан от руки, картинки уходят в журнал.</p><p>Ciphers and puzzles for Foundry VTT. The GM writes a text and the module turns it into props: a turning grille with a brass plate, a letter with a secret (Cardan grille), a cipher disk, a secret alphabet with a key torn into scraps, a book cipher, a scytale, wall knocks and invisible ink. Hand the parts to players — the letter to one, the grille to another — or lay the cipher on a shared table where everyone turns and reads it together. Handwritten props, images to the journal. Russian and English.</p>",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "authors": [
     {
       "name": "Yuriy Klimenko",
@@ -122,7 +122,7 @@
   ],
   "url": "https://github.com/klimenkoyg/foundry-cipher",
   "manifest": "https://github.com/klimenkoyg/foundry-cipher/releases/latest/download/module.json",
-  "download": "https://github.com/klimenkoyg/foundry-cipher/releases/download/v0.1.6/module.zip",
+  "download": "https://github.com/klimenkoyg/foundry-cipher/releases/download/v0.1.7/module.zip",
   "readme": "https://github.com/klimenkoyg/foundry-cipher/blob/main/README.md",
   "bugs": "https://github.com/klimenkoyg/foundry-cipher/issues",
   "changelog": "https://github.com/klimenkoyg/foundry-cipher/blob/main/CHANGELOG.md",

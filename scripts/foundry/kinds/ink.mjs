@@ -202,7 +202,6 @@ export default {
 
   player: {
     size: { width: 820, height: 800 },
-    hint: () => t("Kind.ink.view.hint"),
     render(view, has, state) {
       if (!has.letter || !view.lines) return "";
       const heat = decodeHeat(state.heat, view.cols, view.rows);

@@ -50,10 +50,7 @@
         "view": {
           "plateAria": "Stencil. Drag to move; arrows move it, Enter puts it in place.",
           "align": "In place",
-          "lift": "Lift the stencil",
-          "hintFull": "Drag the stencil and lay it straight on the letter — it settles by itself and letters show through the windows. Arrows move it, Enter puts it in place.",
-          "hintLetter": "You only have the letter.",
-          "hintPlate": "You only have the stencil. Without the letter its windows are empty."
+          "lift": "Lift the stencil"
         }
       }
     }

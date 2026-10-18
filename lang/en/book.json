@@ -62,10 +62,7 @@
         },
         "view": {
           "clear": "Erase marks",
-          "marked": "Marked:",
-          "hintFull": "The numbers on the note are paragraph, word and letter in the word. Click a word in the book to mark it; click again to unmark.",
-          "hintBook": "Click a word to mark it; click again to unmark.",
-          "hintNote": "A note of nothing but numbers. Somewhere there is a book they fit."
+          "marked": "Marked:"
         }
       }
     }

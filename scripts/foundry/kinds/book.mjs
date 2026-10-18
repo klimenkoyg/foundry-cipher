@@ -374,7 +374,6 @@ export default {
 
   player: {
     size: { width: 1040, height: 780 },
-    hint: (has) => t(has.book && has.note ? "Kind.book.view.hintFull" : has.book ? "Kind.book.view.hintBook" : "Kind.book.view.hintNote"),
     render(view, has, state) {
       const marks = new Set(state.marks ?? []);
       let bar = "";

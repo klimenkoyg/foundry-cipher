@@ -64,10 +64,7 @@
           "done": "Filled",
           "of": "of {total}",
           "clear": "Erase guesses",
-          "clearSure": "Erase for sure?",
-          "hintFull": "Type the letters you guess into the table — they appear under the signs. Gold ones come from key scraps. Click a sign in the message to jump to its cell.",
-          "hintMessage": "You have no key: guess from frequent signs and short words. Click a sign in the message to jump to its cell.",
-          "hintKey": "You only hold a key scrap. The message itself is with someone else."
+          "clearSure": "Erase for sure?"
         }
       }
     }

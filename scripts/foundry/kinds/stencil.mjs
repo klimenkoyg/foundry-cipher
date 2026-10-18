@@ -226,7 +226,6 @@ export default {
 
   player: {
     size: { width: 980, height: 640 },
-    hint: (has) => t(has.letter && has.plate ? "Kind.stencil.view.hintFull" : has.letter ? "Kind.stencil.view.hintLetter" : "Kind.stencil.view.hintPlate"),
     render(view, has, state) {
       let bar = "";
       if (has.plate && has.letter) {

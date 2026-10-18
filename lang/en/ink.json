@@ -47,8 +47,7 @@
         "view": {
           "candle": "Candle",
           "candleTip": "Light or put out the candle",
-          "warmed": "Warmed:",
-          "hint": "Hold the mouse button and move the candle over the sheet: where the paper warms up, letters appear. Hold it longer to make them darker."
+          "warmed": "Warmed:"
         }
       }
     }

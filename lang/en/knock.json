@@ -41,8 +41,7 @@
         "swaps": "These letters are not in the grid and are knocked as their neighbours: {list}.",
         "table": {
           "titleRu": "Knock alphabet",
-          "titleEn": "Tap code",
-          "how": "first set of knocks — row, second — column"
+          "titleEn": "Tap code"
         },
         "preview": {
           "listen": "Listen",
@@ -61,10 +60,7 @@
           "paused": "Paused",
           "done": "The knocking stopped",
           "wall": "Stone wall of the cell: the knocks come from here",
-          "scrapEmpty": "Dots will appear here",
-          "hintFull": "A set of knocks is the row, a pause, then the column. A longer pause is a new letter, longer still — a new word.",
-          "hintKnocks": "Count the knocks: the first set is the row, the second is the column. Someone in your party has the grid.",
-          "hintTable": "You only have the grid. The first set of knocks is the row, the second is the column."
+          "scrapEmpty": "Dots will appear here"
         }
       }
     }

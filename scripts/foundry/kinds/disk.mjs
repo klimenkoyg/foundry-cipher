@@ -383,7 +383,6 @@ export default {
 
   player: {
     size: { width: 1120, height: 720 },
-    hint: (has) => t(has.message && has.disk ? "Kind.disk.view.hintFull" : has.disk ? "Kind.disk.view.hintDisk" : "Kind.disk.view.hintMessage"),
     render(view, has, state) {
       let bar = "";
       if (has.disk && view.outer) {

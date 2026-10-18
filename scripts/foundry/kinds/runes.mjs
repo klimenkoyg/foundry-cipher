@@ -587,11 +587,6 @@ export default {
 
   player: {
     size: { width: 1080, height: 800 },
-    hint(has) {
-      const keys = Object.keys(has).some((k) => /^key\d$/.test(k));
-      if (!has.message) return t("Kind.runes.view.hintKey");
-      return t(keys ? "Kind.runes.view.hintFull" : "Kind.runes.view.hintMessage");
-    },
     render: (view, has, state, ctx) => playerHtml(view, state, ctx),
     bind(root, view, has, state, save) {
       if (!view.message) return {};

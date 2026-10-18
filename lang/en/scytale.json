@@ -52,10 +52,7 @@
           "thicker": "Thicker: more faces",
           "wind": "Wind on the rod",
           "windTip": "Wind the strip on your rod with {faces}",
-          "windAria": "The strip wound on a rod",
-          "hintFull": "Read along the faces, row by row. “Wind on the rod” puts the strip on your rod; − and + try another thickness.",
-          "hintRibbon": "Find the rod's thickness with − and +: at the right one, text reads along the faces.",
-          "hintRod": "You only have the rod. Without the strip there is nothing to read."
+          "windAria": "The strip wound on a rod"
         }
       }
     }

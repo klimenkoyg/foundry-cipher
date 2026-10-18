@@ -57,7 +57,7 @@ function tornPath(w, h, rng) {
 
 /* ---------- таблица ---------- */
 
-const TB = { cell: 12, head: 9, pad: 8, title: 12, foot: 14 };
+const TB = { cell: 12, head: 9, pad: 8, title: 12, foot: 9 };
 
 function tableGeom(alphabet) {
   const rows = tableOf(alphabet).rows;
@@ -134,10 +134,9 @@ export function tableSvg(alphabet, o = {}) {
   out.push("</g>");
 
   const swaps = Object.entries(tableOf(alphabet).swaps).map(([a, b]) => `${a} = ${b}`).join("  ·  ");
-  const how = t("Kind.knock.table.how");
+  // Как читать удары, на таблице не пишется: догадаться — часть загадки.
   const wide = g.w - 2 * TB.pad;
-  out.push(`<text x="${num(g.w / 2)}" y="${bottom + 5}" dy=".34em" text-anchor="middle" font-family="${SERIF}" font-weight="700" font-size="${fit(swaps, 4.4, wide)}" fill="${INK}">${xml(swaps)}</text>`);
-  out.push(`<text x="${num(g.w / 2)}" y="${bottom + 10.6}" dy=".34em" text-anchor="middle" font-family="${SERIF}" font-style="italic" font-size="${fit(how, 4, wide, 0.46)}" fill="${INK_SOFT}">${xml(how)}</text>`);
+  out.push(`<text x="${num(g.w / 2)}" y="${bottom + 6}" dy=".34em" text-anchor="middle" font-family="${SERIF}" font-weight="700" font-size="${fit(swaps, 4.4, wide)}" fill="${INK}">${xml(swaps)}</text>`);
   out.push("</svg>");
   return out.join("");
 }
@@ -766,11 +765,6 @@ export default {
 
   player: {
     size: { width: 1060, height: 720 },
-    hint(has) {
-      if (has.knocks && has.table) return t("Kind.knock.view.hintFull");
-      if (has.knocks) return t("Kind.knock.view.hintKnocks");
-      return t("Kind.knock.view.hintTable");
-    },
     render(view, has, state) {
       const record = state.record ?? true;
       const mode = has.knocks && has.table ? "both" : has.knocks ? "knocks" : "table";

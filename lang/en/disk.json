@@ -42,10 +42,7 @@
           "over": "{top} over {under}",
           "ccw": "Turn the ring one letter counterclockwise (←)",
           "cw": "Turn the ring one letter clockwise (→)",
-          "diskAria": "Cipher disk. Arrow keys turn the inner ring one letter.",
-          "hintFull": "Drag the inner ring, use the mouse wheel or the buttons. Find a note letter on the inner ring — the real one is right above it.",
-          "hintMessage": "You only have the note. Its letters are shifted around a circle — you need the disk to read it.",
-          "hintDisk": "You only have the disk. Drag the inner ring or use the mouse wheel."
+          "diskAria": "Cipher disk. Arrow keys turn the inner ring one letter."
         }
       }
     }

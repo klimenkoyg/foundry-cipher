@@ -226,7 +226,6 @@ export default {
 
   player: {
     size: { width: 900, height: 720 },
-    hint: (has) => t(has.letter && has.plate ? "Kind.grille.view.hintFull" : has.letter ? "Kind.grille.view.hintLetter" : "Kind.grille.view.hintPlate"),
     render(view, has, state) {
       let bar = "";
       if (has.plate) {

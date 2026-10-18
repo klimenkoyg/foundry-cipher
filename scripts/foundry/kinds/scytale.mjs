@@ -409,7 +409,6 @@ export default {
 
   player: {
     size: { width: 1000, height: 760 },
-    hint: (has) => t(has.ribbon && has.rod ? "Kind.scytale.view.hintFull" : has.ribbon ? "Kind.scytale.view.hintRibbon" : "Kind.scytale.view.hintRod"),
     render(view, has, state) {
       if (!view.ribbon) return view.faces ? rodStage(view.faces) : "";
       const n = clampN(state.n ?? WIND.min);

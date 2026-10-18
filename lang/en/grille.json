@@ -59,10 +59,7 @@
           "turnRight": "Turn clockwise (E)",
           "align": "Put back",
           "lift": "Lift the grille",
-          "top": "On top:",
-          "hintFull": "Click the grille to turn it clockwise, right-click to turn it back. Drag to slide it. Q and E turn it from the keyboard.",
-          "hintLetter": "You only have the letter.",
-          "hintPlate": "You only have the grille. Click to turn it clockwise, right-click to turn it back."
+          "top": "On top:"
         }
       }
     }

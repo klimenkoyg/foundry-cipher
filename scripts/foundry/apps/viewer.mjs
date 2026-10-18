@@ -96,7 +96,6 @@ export class ViewerApp extends HandlebarsApplicationMixin(ApplicationV2) {
     return {
       kindId: kind.id,
       body: kind.player.render(e.view, e.parts, state, { shared: this.shared }),
-      hint: kind.player.hint?.(e.parts) ?? "",
       notes: state.notes ?? "",
       shared: this.shared,
       notesLabel: t(this.shared ? "View.notesShared" : "View.notes"),

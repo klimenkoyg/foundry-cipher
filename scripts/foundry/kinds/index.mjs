@@ -15,7 +15,7 @@
    view(puzzle, parts)            — что уходит игроку (без ответа и только для его частей)
    code(puzzle)                   — { line, notes: [], reads } — ключ для ведущего
    preview: { render(puzzle, ui), action?(op, ui, puzzle), after?(root, ui, puzzle) } — предпросмотр с ответом
-   player: { size, hint(has), render(view, has, state, ctx), bind(root, view, has, state, save, ctx) → { action(op, target), apply(state) } }
+   player: { size, render(view, has, state, ctx), bind(root, view, has, state, save, ctx) → { action(op, target), apply(state) } }
    images(puzzle)                 — [{ id, svg(px) }] — картинки для PNG и журнала; подпись — Kind.<id>.part.<id>
    demo()                         — пример для стенда и снимков
 
