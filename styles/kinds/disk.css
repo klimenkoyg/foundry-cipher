@@ -79,3 +79,25 @@
     transition: none;
   }
 }
+
+/* Сборка кольца игроками: слово и кнопка — в панели над диском */
+.cp-viewer-app .cp-disk-word {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 0 auto;
+}
+
+.cp-viewer-app .cp-disk-word input {
+  width: 190px;
+  min-height: 32px;
+  padding: 4px 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cp-viewer-app .cp-disk-word input::placeholder {
+  text-transform: none;
+  letter-spacing: 0;
+}

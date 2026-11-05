@@ -1,8 +1,10 @@
 /* Шифровальный диск (Цезарь, диск Альберти): записка, написанная буквами внутреннего кольца,
    и латунный диск из двух колец. Игрок крутит внутреннее кольцо, пока абракадабра не станет словами.
+   С настройкой selfRing кольцо по слову игроки собирают сами: диск приходит с кольцом по порядку
+   и формой для слова, а ни слова, ни перемешанного кольца игроку не уходит.
    Ядро — scripts/core/disk.mjs; здесь поля мастерской, рисунки, окно игрока и картинки. */
 
-import { decrypt, generate, mod, underOf } from "../../core/disk.mjs";
+import { decrypt, generate, innerRing, mod, underOf } from "../../core/disk.mjs";
 import { clamp } from "../../core/rng.mjs";
 import { esc, plural, t } from "../i18n.mjs";
 import { brass, INK, INK_SOFT, LIT, num, paper, scriptAttrs, SERIF, svgOpen, uid, xml } from "../paper.mjs";
@@ -230,7 +232,7 @@ export function diskSvg(view, o = {}) {
   out.push(`<path d="${dividers(n, step, R.band, R.inner - 1.6)}" stroke-width=".35" opacity=".75"/>`);
   out.push(`<circle r="${R.rose}" stroke-width=".3" stroke-dasharray=".6 1.6" opacity=".7"/></g>`);
   out.push(rose(R.rose - 2));
-  out.push(`<g font-family="${SERIF}" font-weight="700" font-size="${innerSize}" fill="${INK}" text-anchor="middle">${ringText([...inner], R.innerText, step)}</g>`);
+  out.push(`<g class="cp-disk-letters" font-family="${SERIF}" font-weight="700" font-size="${innerSize}" fill="${INK}" text-anchor="middle">${ringText([...inner], R.innerText, step)}</g>`);
   out.push("</g>");
 
   // Ось, окошко чтения и метка сверху — поверх, неподвижные, мышь пропускают.
@@ -298,14 +300,37 @@ function overHtml(outer, letter) {
     .replace("\u0002", `<b data-under>${esc(letter)}</b>`);
 }
 
+/** Внутреннее кольцо в окне игрока: при сборке — по слову, которое он вписал; иначе — как пришло. */
+const ringOf = (view, word) => (view.selfRing ? innerRing(view.alphabet, word ?? "").ring : view.inner);
+
+/** Форма «Слово для кольца»: вписал и собрал — кольцо перестроилось; пусто — снова по порядку. */
+function wordForm(word) {
+  const label = esc(t("Kind.disk.view.ringWord"));
+  return (
+    `<form class="cp-disk-word">` +
+    `<input type="text" name="ringWord" value="${esc(word ?? "")}" placeholder="${label}" aria-label="${label}" spellcheck="false" autocomplete="off">` +
+    `<button type="submit" class="cp-btn"><i class="fa-solid fa-arrows-spin" inert></i> ${esc(t("Kind.disk.view.ringBuild"))}</button>` +
+    `</form>`
+  );
+}
+
 /** Подпись ключа: «А над Г». */
 const keyOf = (c) => ({ top: c.outer[0], under: underOf(c, 0) });
+
+/** Слово задано — можно отдать игрокам сборку кольца. */
+const selfRingAllowed = (p) => Boolean(String(p.keyword ?? "").trim());
+
+/** Кольцо по слову игроки собирают сами (и слово у шифра правда есть). */
+const selfRing = (p) => Boolean(p.selfRing && p.cipher?.word);
+
+/** Слово так, как его вписал ведущий: «ВОРОН», а не «ВОРН» без повторов — кольцо то же. */
+const keywordOf = (p) => String(p.keyword ?? "").trim().toUpperCase() || p.cipher.word;
 
 function statusOf(p) {
   const c = p.cipher;
   const parts = [plural(c.text.length, "Count.letters"), c.alphabet === "en" ? t("Kind.disk.status.en") : t("Kind.disk.status.ru")];
   if (!c.keyGiven) parts.push(t("Kind.disk.status.random", keyOf(c)));
-  if (c.word) parts.push(t("Kind.disk.status.word", { word: c.word }));
+  if (c.word) parts.push(t(selfRing(p) ? "Kind.disk.status.wordSelf" : "Kind.disk.status.word", { word: keywordOf(p) }));
   if (c.dropped?.length) parts.push(t("Status.dropped", { chars: c.dropped.join(" ") }));
   return parts.join(" · ");
 }
@@ -315,7 +340,7 @@ export default {
   icon: "fa-solid fa-compact-disc",
   script: "note",
 
-  defaults: () => ({ phrase: "", key: "", keyword: "", spaces: true }),
+  defaults: () => ({ phrase: "", key: "", keyword: "", spaces: true, selfRing: false }),
 
   fields: [
     { name: "phrase", type: "textarea", wide: true, rows: 3, style: "prose" },
@@ -324,6 +349,8 @@ export default {
         { name: "key", type: "text" },
         { name: "keyword", type: "text" },
         { name: "spaces", type: "checkbox" },
+        // Собирать кольцо самим имеет смысл, только когда оно по слову.
+        { name: "selfRing", type: "checkbox", when: selfRingAllowed },
       ],
     },
   ],
@@ -361,13 +388,14 @@ export default {
     const c = p.cipher;
     const v = {};
     if (parts.message) Object.assign(v, { note: c.note, script: p.script ?? "note" });
-    if (parts.disk) Object.assign(v, { outer: c.outer, inner: c.inner });
+    // Сборка кольца у игроков: кольцо по порядку и алфавит, ни слова, ни перемешанного кольца.
+    if (parts.disk) Object.assign(v, selfRing(p) ? { outer: c.outer, inner: c.outer, alphabet: c.alphabet, selfRing: true } : { outer: c.outer, inner: c.inner });
     return v;
   },
 
   code(p) {
     const c = p.cipher;
-    const notes = c.word ? [t("Kind.disk.codeWord", { word: c.word })] : [];
+    const notes = c.word ? [t(selfRing(p) ? "Kind.disk.codeWordSelf" : "Kind.disk.codeWord", { word: keywordOf(p) })] : [];
     return { line: t("Kind.disk.code", keyOf(c)), notes, reads: c.plain };
   },
 
@@ -386,6 +414,7 @@ export default {
     render(view, has, state) {
       let bar = "";
       if (has.disk && view.outer) {
+        view = { ...view, inner: ringOf(view, state.word) };
         const n = view.outer.length;
         const off = mod(Number(state.offset) || 0, n);
         const btn = (op, icon, label) => `<button type="button" class="cp-btn cp-btn--icon" data-action="kind" data-op="${op}" data-tooltip="${esc(label)}" aria-label="${esc(label)}"><i class="fa-solid ${icon}" inert></i></button>`;
@@ -394,6 +423,7 @@ export default {
           btn("ccw", "fa-caret-left", t("Kind.disk.view.ccw")) +
           btn("cw", "fa-caret-right", t("Kind.disk.view.cw")) +
           `<span class="cp-disk-read">${overHtml(view.outer, view.inner[off])}</span>` +
+          (view.selfRing ? wordForm(state.word) : "") +
           `</div>`;
       }
       return bar + stage(view, has, { offset: state.offset });
@@ -404,6 +434,9 @@ export default {
       const svg = wheel.querySelector("svg");
       const ring = wheel.querySelector(".cp-disk-inner");
       const under = root.querySelector("[data-under]");
+      const form = root.querySelector(".cp-disk-word");
+      let inner = ringOf(view, state.word);
+      let word = String(state.word ?? "");
       const n = view.outer.length;
       const step = 360 / n;
       // turn — поворот кольца в буквах по часовой; обороты копятся, чтобы кольцо не прокручивалось назад через круг
@@ -417,7 +450,7 @@ export default {
         ring.style.transform = `rotate(${num(angle)}deg)`;
       };
       const show = (off) => {
-        const letter = view.inner[off];
+        const letter = inner[off];
         if (under) under.textContent = letter;
         wheel.setAttribute("aria-valuenow", String(off));
         wheel.setAttribute("aria-valuetext", overText(view.outer, letter));
@@ -433,6 +466,23 @@ export default {
         commit();
       };
       place();
+
+      // Собрать кольцо по слову: буквы переписываются на месте, поворот кольца не сбивается.
+      const setWord = (next) => {
+        word = String(next ?? "");
+        inner = ringOf(view, word);
+        ring.querySelectorAll(".cp-disk-letters text").forEach((el, i) => (el.textContent = inner[i]));
+        const input = form?.querySelector("input");
+        if (input && input.value !== word) input.value = word;
+        show(offsetAt(Math.round(angle / step)));
+      };
+      form?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const next = form.querySelector("input").value.trim();
+        setWord(next);
+        save({ word: next });
+      });
 
       // Тянуть: угол от середины диска; отпустили — кольцо защёлкивается на ближайшую букву.
       const center = () => {
@@ -516,8 +566,9 @@ export default {
           if (op === "ccw") rotate(-1);
           else if (op === "cw") rotate(1);
         },
-        /** Чужой поворот на общем столе: ближайшим путём, если сами сейчас не тянем. */
+        /** Чужой поворот (и слово) на общем столе: ближайшим путём, если сами сейчас не тянем. */
         apply(next) {
+          if (view.selfRing && String(next?.word ?? "") !== word) setWord(next?.word);
           if (dragging) return;
           const off = mod(Number(next?.offset) || 0, n);
           const now = Math.round(angle / step);
@@ -536,7 +587,7 @@ export default {
     const c = p.cipher;
     return [
       { id: "message", svg: (px) => noteSvg({ note: c.note, script: p.script ?? "note" }, { px, label: t("Kind.disk.part.message") }) },
-      { id: "disk", svg: (px) => diskSvg(c, { px, offset: 0, label: t("Kind.disk.part.disk") }) },
+      { id: "disk", svg: (px) => diskSvg(selfRing(p) ? { outer: c.outer, inner: c.outer } : c, { px, offset: 0, label: t("Kind.disk.part.disk") }) },
     ];
   },
 

@@ -19,13 +19,16 @@
           "keywordHint": "Optional",
           "keywordTip": "Mix the inner ring like Alberti did: the keyword's letters without repeats first, then the rest in order.",
           "spaces": "Spaces and marks",
-          "spacesTip": "Keep spaces and punctuation in the note. Off — letters only, in groups of five."
+          "spacesTip": "Keep spaces and punctuation in the note. Off — letters only, in groups of five.",
+          "selfRing": "Players build the ring themselves",
+          "selfRingTip": "The disk comes with the ring in plain order and a field for a word. The players have to find the word and enter it, and the ring is rebuilt."
         },
         "status": {
           "ru": "Russian alphabet: 32 letters, Ё as Е",
           "en": "Latin alphabet: 26 letters",
           "random": "random key — {top} over {under}",
-          "word": "ring keyword “{word}”"
+          "word": "ring keyword “{word}”",
+          "wordSelf": "players build the ring from the word “{word}”"
         },
         "problem": {
           "empty": "Type the note text: the cipher is built from it.",
@@ -42,8 +45,11 @@
           "over": "{top} over {under}",
           "ccw": "Turn the ring one letter counterclockwise (←)",
           "cw": "Turn the ring one letter clockwise (→)",
-          "diskAria": "Cipher disk. Arrow keys turn the inner ring one letter."
-        }
+          "diskAria": "Cipher disk. Arrow keys turn the inner ring one letter.",
+          "ringWord": "Word for the ring",
+          "ringBuild": "Build the ring"
+        },
+        "codeWordSelf": "Players build the ring themselves, from the word “{word}”"
       }
     }
   }

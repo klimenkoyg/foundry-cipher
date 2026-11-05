@@ -26,7 +26,7 @@ Requires Foundry VTT **v13** or newer. Any game system.
 |---|---|---|---|
 | <img src="docs/screens/en/grille.jpg" width="180"> | **Turning grille** | a letter with a grid of letters and a brass grille with windows | lay the grille on the letter and turn it by the code; the phrase shows through the windows |
 | <img src="docs/screens/en/stencil.jpg" width="180"> | **Letter with a secret** (Cardan grille) | an ordinary letter and a stencil with slots | lay the stencil straight, and the secret phrase shows through among the letter's words |
-| <img src="docs/screens/en/disk.jpg" width="180"> | **Cipher disk** | a note in gibberish and a two-ring disk | turn the inner ring until the note becomes words; the key “A over K” is hidden in the world |
+| <img src="docs/screens/en/disk.jpg" width="180"> | **Cipher disk** | a note in gibberish and a two-ring disk | turn the inner ring until the note becomes words; the key “A over K” is hidden in the world, and optionally the players build the ring themselves from a word they find |
 | <img src="docs/screens/en/runes.jpg" width="180"> | **Secret alphabet** | a message in made-up signs and scraps of the key | fill letters into the sign table; the GM hands out the key scraps along the adventure |
 | <img src="docs/screens/en/book.jpg" width="180"> | **Book cipher** | a note of numbers and a book | count paragraph, word and letter in the book; first they have to work out which book is the key |
 | <img src="docs/screens/en/scytale.jpg" width="180"> | **Scytale** | a strip of jumbled letters and a rod | wind the strip on a rod of the right thickness; the text lines up along the faces |
