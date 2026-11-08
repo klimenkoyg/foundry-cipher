@@ -9,6 +9,7 @@ import { getKind, listKinds } from "./foundry/kinds/index.mjs";
 import { registerSettings } from "./foundry/settings.mjs";
 import { Inbox, Puzzles, Tables } from "./foundry/store.mjs";
 import { registerQueries } from "./foundry/transport.mjs";
+import { checkForUpdate } from "./foundry/update-check.mjs";
 
 /** Что этот клиент уже открывал: «v:id» — выданное, «t:id» — общий стол; значение — ping. Хранится в браузере. */
 const SEEN_KEY = `${MODULE_ID}.seen`;
@@ -99,6 +100,10 @@ Hooks.once("ready", () => {
     },
   };
   sync({ announce: true, maxAge: 12 * 3600 * 1000 });
+  // Вышла новая версия — ведущему окошко «что нового». Чуть позже: пусть мир сначала загрузится.
+  if (game.user.isGM) {
+    setTimeout(() => checkForUpdate().catch((err) => console.warn(`${MODULE_ID} | проверка обновлений`, err)), 4000);
+  }
 });
 
 Hooks.on("updateUser", (user, changes) => {

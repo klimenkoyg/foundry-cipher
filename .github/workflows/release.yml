@@ -22,9 +22,11 @@ jobs:
       - run: npm test
       - run: npm run check
       - run: node scripts-dev/build.mjs "${GITHUB_REF_NAME}"
+      # Описание релиза — из CHANGELOG.md: его «Что нового» показывает ведущему окошко о новой версии.
+      - run: node scripts-dev/release-notes.mjs "${GITHUB_REF_NAME}" > dist/notes.md
       - uses: softprops/action-gh-release@v2
         with:
           files: |
             dist/module.zip
             dist/module.json
-          generate_release_notes: true
+          body_path: dist/notes.md

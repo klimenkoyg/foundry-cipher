@@ -4,6 +4,8 @@ export const SETTINGS = {
   puzzles: "puzzles",
   tables: "tables",
   lastPuzzle: "lastPuzzle",
+  updateCheck: "updateCheck",
+  updateState: "updateState",
 };
 
 /** Флаги пользователя: что ведущий выдал игроку и как игрок разложил свои вещи. */

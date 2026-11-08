@@ -124,6 +124,22 @@
       "note": "hasty note",
       "print": "hand-printed",
       "charter": "old charter hand"
+    },
+    "Settings": {
+      "updateCheck": {
+        "name": "Tell me about new versions",
+        "hint": "When you enter the world (at most once an hour) the module asks GitHub whether a new version of Ciphers & Puzzles is out and shows the GM what's new and how to update. Players see nothing."
+      }
+    },
+    "Update": {
+      "title": "Ciphers & Puzzles: version {version} is out",
+      "lead": "You have {installed} installed; {version} is out.",
+      "whatsNew": "What's new",
+      "more": "…and {n} more on the release page.",
+      "how": "To update: on the Foundry setup screen, Add-on Modules → Check for Updates → update Ciphers & Puzzles, then relaunch the world.",
+      "page": "Release page on GitHub",
+      "ok": "Got it",
+      "later": "Remind me tomorrow"
     }
   }
 }

@@ -1092,3 +1092,58 @@
     transition: none;
   }
 }
+
+/* ---------- Окошко «вышла новая версия» (внутри обычного диалога Foundry) ---------- */
+
+.ssl-ciphers.cp-update {
+  max-width: 500px;
+  padding: 12px 14px;
+  border-radius: var(--cp-r);
+  background: var(--cp-desk-2);
+  box-shadow: inset 0 0 0 1px var(--cp-line);
+  color: var(--cp-muted);
+  line-height: 1.45;
+}
+
+.cp-update p {
+  margin: 0 0 8px;
+}
+
+.cp-update p:last-child {
+  margin-bottom: 0;
+}
+
+.cp-update .cp-update__lead {
+  color: var(--cp-text);
+}
+
+.cp-update h4 {
+  margin: 10px 0 4px;
+  padding: 0;
+  border: 0;
+  color: var(--cp-text);
+  font-family: var(--cp-display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.cp-update ul {
+  max-height: 260px;
+  margin: 0 0 8px;
+  padding-left: 18px;
+  overflow-y: auto;
+}
+
+.cp-update li + li {
+  margin-top: 4px;
+}
+
+.cp-update .cp-update__more,
+.cp-update .cp-update__how {
+  color: var(--cp-faint);
+  font-size: 12.5px;
+}
+
+.cp-update a {
+  color: var(--cp-accent);
+}

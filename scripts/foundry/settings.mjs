@@ -11,4 +11,14 @@ export function registerSettings({ onPuzzles, onTables }) {
   // Общие столы: шифр без ответа, кто за столом и как лежат вещи. Пишет ведущий, в том числе по просьбе игроков.
   reg(SETTINGS.tables, { scope: "world", config: false, type: Object, default: {}, onChange: onTables });
   reg(SETTINGS.lastPuzzle, { scope: "client", config: false, type: String, default: "" });
+  // «Вышла новая версия»: у каждого ведущего своё — проверять ли и что уже показали (foundry/update-check.mjs).
+  reg(SETTINGS.updateCheck, {
+    name: "CIPHERS.Settings.updateCheck.name",
+    hint: "CIPHERS.Settings.updateCheck.hint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+  reg(SETTINGS.updateState, { scope: "client", config: false, type: Object, default: {} });
 }
